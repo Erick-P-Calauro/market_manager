@@ -8,6 +8,9 @@ class Typograph {
       GoogleFonts.roboto(fontSize: 20, fontWeight: FontWeight.bold);
 
   static TextStyle HeadlineMedium =
+      GoogleFonts.roboto(fontSize: 20, fontWeight: FontWeight.w400);
+
+  static TextStyle HeadlineSmall =
       GoogleFonts.roboto(fontSize: 18, fontWeight: FontWeight.w500);
 
   static TextStyle TitleLarge =

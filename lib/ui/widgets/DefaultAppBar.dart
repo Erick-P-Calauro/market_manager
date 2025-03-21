@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:market_manager/utils/CustomColors.dart';
 
-class DefaultAppBar extends PreferredSize {
+class DefaultAppBar extends StatelessWidget implements PreferredSizeWidget {
   const DefaultAppBar({
     super.key,
-    required super.preferredSize,
-    super.child = const Text(""),
   });
+
+  @override
+  Size get preferredSize => Size.fromHeight(100);
 
   @override
   Widget build(BuildContext context) {
