@@ -5,6 +5,7 @@ import 'package:market_manager/ui/widgets/DefaultDrawer.dart';
 import 'package:market_manager/ui/widgets/ShopCardList.dart';
 import 'package:provider/provider.dart';
 
+// Consolidar a ideia de adicionar botão no drawer para esta página
 class ShopListPage extends StatelessWidget {
   const ShopListPage({super.key});
 

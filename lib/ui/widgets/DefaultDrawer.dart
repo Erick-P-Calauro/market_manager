@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:market_manager/routes.dart';
 import 'package:market_manager/utils/CustomColors.dart';
 import 'package:market_manager/utils/Typograph.dart';
 
@@ -37,7 +38,10 @@ class DefaultDrawer extends StatelessWidget {
                               ),
                               title: Text("Adicionar Lista",
                                   style: defaultTextStyle),
-                              onTap: () => {print("Adicionar Lista")},
+                              onTap: () => {
+                                Navigator.pushNamed(
+                                    context, RouteGenerator.NewShopPage)
+                              },
                             ),
                             ListTile(
                                 leading: Icon(
@@ -47,7 +51,10 @@ class DefaultDrawer extends StatelessWidget {
                                 ),
                                 title: Text("Registrar Produto",
                                     style: defaultTextStyle),
-                                onTap: () => {print("Registrar Produto")}),
+                                onTap: () => {
+                                      Navigator.pushNamed(context,
+                                          RouteGenerator.NewProductPage)
+                                    }),
                           ],
                         )),
                     Divider(color: Colors.black, height: 0),
@@ -60,19 +67,28 @@ class DefaultDrawer extends StatelessWidget {
                               leading: Icon(Icons.description,
                                   color: Colors.black, size: 30),
                               title: Text("Produtos", style: defaultTextStyle),
-                              onTap: () => {print("Produtos")}),
+                              onTap: () => {
+                                    Navigator.pushNamed(
+                                        context, RouteGenerator.ListProductPage)
+                                  }),
                           ListTile(
                               leading: Icon(Icons.list,
                                   color: Colors.black, size: 30),
                               title:
                                   Text("Categorias", style: defaultTextStyle),
-                              onTap: () => {print("Categorias")}),
+                              onTap: () => {
+                                    Navigator.pushNamed(context,
+                                        RouteGenerator.ListCategoryPage)
+                                  }),
                           ListTile(
                               leading: Icon(Icons.mode_edit,
                                   color: Colors.black, size: 30),
                               title: Text("Unidades de M.",
                                   style: defaultTextStyle),
-                              onTap: () => {print("Unidades de Medida")}),
+                              onTap: () => {
+                                    Navigator.pushNamed(
+                                        context, RouteGenerator.ListUnityPage)
+                                  }),
                         ],
                       ),
                     ),
@@ -87,7 +103,10 @@ class DefaultDrawer extends StatelessWidget {
                                 color: Colors.black, size: 30),
                             title:
                                 Text("Configurações", style: defaultTextStyle),
-                            onTap: () => {print("Configurações")}))
+                            onTap: () => {
+                                  Navigator.pushNamed(
+                                      context, RouteGenerator.Settings)
+                                }))
                   ],
                 ))));
   }
