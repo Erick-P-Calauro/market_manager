@@ -7,11 +7,14 @@ class DefaultDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const defaultPadding = EdgeInsets.fromLTRB(20, 30, 0, 30);
+    final defaultPadding = EdgeInsets.fromLTRB(5, 20, 0, 20);
+    final defaultTextStyle = Typograph.HeadlineMedium;
+    final defaultSpacing = 5.0;
 
     return Drawer(
         backgroundColor: CustomColors.BlueMarket,
         shape: Border.all(width: 0),
+        width: 270,
         child: Padding(
             padding:
                 EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.2),
@@ -23,7 +26,7 @@ class DefaultDrawer extends StatelessWidget {
                     Container(
                         padding: defaultPadding,
                         child: Column(
-                          spacing: 15,
+                          spacing: defaultSpacing,
                           children: [
                             ListTile(
                               horizontalTitleGap: 10,
@@ -33,7 +36,7 @@ class DefaultDrawer extends StatelessWidget {
                                 size: 30,
                               ),
                               title: Text("Adicionar Lista",
-                                  style: Typograph.HeadlineMedium),
+                                  style: defaultTextStyle),
                               onTap: () => {print("Adicionar Lista")},
                             ),
                             ListTile(
@@ -43,7 +46,7 @@ class DefaultDrawer extends StatelessWidget {
                                   size: 30,
                                 ),
                                 title: Text("Registrar Produto",
-                                    style: Typograph.HeadlineMedium),
+                                    style: defaultTextStyle),
                                 onTap: () => {print("Registrar Produto")}),
                           ],
                         )),
@@ -51,25 +54,24 @@ class DefaultDrawer extends StatelessWidget {
                     Container(
                       padding: defaultPadding,
                       child: Column(
-                        spacing: 15,
+                        spacing: defaultSpacing,
                         children: [
                           ListTile(
                               leading: Icon(Icons.description,
                                   color: Colors.black, size: 30),
-                              title: Text("Produtos",
-                                  style: Typograph.HeadlineMedium),
+                              title: Text("Produtos", style: defaultTextStyle),
                               onTap: () => {print("Produtos")}),
                           ListTile(
                               leading: Icon(Icons.list,
                                   color: Colors.black, size: 30),
-                              title: Text("Categorias",
-                                  style: Typograph.HeadlineMedium),
+                              title:
+                                  Text("Categorias", style: defaultTextStyle),
                               onTap: () => {print("Categorias")}),
                           ListTile(
                               leading: Icon(Icons.mode_edit,
                                   color: Colors.black, size: 30),
                               title: Text("Unidades de M.",
-                                  style: Typograph.HeadlineMedium),
+                                  style: defaultTextStyle),
                               onTap: () => {print("Unidades de Medida")}),
                         ],
                       ),
@@ -83,8 +85,8 @@ class DefaultDrawer extends StatelessWidget {
                         child: ListTile(
                             leading: Icon(Icons.settings,
                                 color: Colors.black, size: 30),
-                            title: Text("Configurações",
-                                style: Typograph.HeadlineMedium),
+                            title:
+                                Text("Configurações", style: defaultTextStyle),
                             onTap: () => {print("Configurações")}))
                   ],
                 ))));
