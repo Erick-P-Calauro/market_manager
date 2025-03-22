@@ -13,7 +13,7 @@ class DefaultDrawer extends StatelessWidget {
 
     return Drawer(
         backgroundColor: CustomColors.BlueMarket,
-        shape: Border.all(width: 0),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(0)),
         width: 270,
         child: Padding(
             padding:
