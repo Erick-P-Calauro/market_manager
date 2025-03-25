@@ -85,64 +85,66 @@ class OpenShopCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.only(top: 25),
-      child: Column(
-        children: [
-          // CloseShopCard without total
-          Container(
-              decoration: BoxDecoration(
-                  color: CustomColors.LightGray1,
-                  borderRadius: BorderRadius.circular(2)),
-              padding: EdgeInsets.symmetric(vertical: 13, horizontal: 20),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text("DEZEMBRO / $name", style: Typograph.TitleSmall),
-                  Icon(
-                    Icons.keyboard_arrow_down,
-                    size: 24,
-                    color: Colors.black,
-                  ),
-                ],
-              )),
-          // Itens
-          Container(
-              color: CustomColors.LightGray2,
-              padding: EdgeInsets.symmetric(vertical: 15),
-              width: MediaQuery.of(context).size.width,
-              child: Column(
-                children: [
-                  // SliverList(delegate: Delegate),
-                  Divider(
-                    color: Colors.black,
-                  ),
-
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(20, 15, 20, 0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          "Total : R\$ ${total.toStringAsFixed(2)}",
-                          style: Typograph.SubtitleLarge,
-                        ),
-                        GestureDetector(
-                          child: Container(
-                            padding: EdgeInsets.symmetric(
-                                vertical: 6, horizontal: 12),
-                            decoration: BoxDecoration(
-                                color: CustomColors.BlueMarket,
-                                borderRadius: BorderRadius.circular(2)),
-                            child: Text("Mais Detalhes",
-                                style: Typograph.SubtitleLarge.copyWith(
-                                    color: Colors.white)),
-                          ),
-                        )
-                      ],
+      child: Card(
+        child: Column(
+          children: [
+            // CloseShopCard without total
+            Container(
+                decoration: BoxDecoration(
+                    color: CustomColors.LightGray1,
+                    borderRadius: BorderRadius.circular(2)),
+                padding: EdgeInsets.symmetric(vertical: 13, horizontal: 20),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text("DEZEMBRO / $name", style: Typograph.TitleSmall),
+                    Icon(
+                      Icons.keyboard_arrow_down,
+                      size: 24,
+                      color: Colors.black,
                     ),
-                  )
-                ],
-              )),
-        ],
+                  ],
+                )),
+            // Itens
+            Container(
+                color: CustomColors.LightGray2,
+                padding: EdgeInsets.symmetric(vertical: 15),
+                width: MediaQuery.of(context).size.width,
+                child: Column(
+                  children: [
+                    // SliverList(delegate: Delegate),
+                    Divider(
+                      color: Colors.black,
+                    ),
+
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(20, 15, 20, 0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            "Total : R\$ ${total.toStringAsFixed(2)}",
+                            style: Typograph.SubtitleLarge,
+                          ),
+                          GestureDetector(
+                            child: Container(
+                              padding: EdgeInsets.symmetric(
+                                  vertical: 6, horizontal: 12),
+                              decoration: BoxDecoration(
+                                  color: CustomColors.BlueMarket,
+                                  borderRadius: BorderRadius.circular(2)),
+                              child: Text("Mais Detalhes",
+                                  style: Typograph.SubtitleLarge.copyWith(
+                                      color: Colors.white)),
+                            ),
+                          )
+                        ],
+                      ),
+                    )
+                  ],
+                )),
+          ],
+        ),
       ),
     );
   }

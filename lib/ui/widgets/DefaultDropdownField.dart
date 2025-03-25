@@ -2,13 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:market_manager/utils/CustomColors.dart';
 import 'package:market_manager/utils/Typograph.dart';
 
-class DefaultFormField extends StatelessWidget {
-  const DefaultFormField({
-    super.key,
-    required this.labelText,
-    required this.hintText,
-    required this.maxWidth,
-  });
+class DefaultDropdownField extends StatelessWidget {
+  const DefaultDropdownField(
+      {super.key,
+      required this.labelText,
+      required this.hintText,
+      required this.maxWidth});
 
   final String labelText;
   final String hintText;
@@ -24,7 +23,7 @@ class DefaultFormField extends StatelessWidget {
         children: [
           Text(labelText, style: Typograph.TitleSmall),
           SizedBox(height: 10),
-          TextField(
+          DropdownButtonFormField(
             style: Typograph.SubtitleLarge,
             decoration: InputDecoration(
                 hintText: hintText,
@@ -41,6 +40,10 @@ class DefaultFormField extends StatelessWidget {
                     borderSide: BorderSide(color: CustomColors.BlueMarket)),
                 filled: true,
                 fillColor: CustomColors.LightGray1),
+            items: [],
+            onChanged: (dynamic value) {
+              print(value);
+            },
           )
         ],
       ),

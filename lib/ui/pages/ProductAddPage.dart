@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:market_manager/ui/widgets/ButtonDropdownField.dart';
 import 'package:market_manager/ui/widgets/DefaultAppBar.dart';
 import 'package:market_manager/ui/widgets/DefaultDrawer.dart';
-import 'package:market_manager/ui/widgets/FormField.dart';
+import 'package:market_manager/ui/widgets/DefaultDropdownField.dart';
+import 'package:market_manager/ui/widgets/DefaultFormField.dart';
+import 'package:market_manager/utils/CustomColors.dart';
+import 'package:market_manager/utils/Typograph.dart';
 import '../widgets/Header.dart';
 
 class ProductAddPage extends StatelessWidget {
@@ -9,6 +13,8 @@ class ProductAddPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // contextWidth = width do dispositivo
+    // dentro do container usar contextwidth - 40 por conta das padding
     double contextWidth = MediaQuery.of(context).size.width;
 
     return Scaffold(
@@ -36,9 +42,9 @@ class ProductAddPage extends StatelessWidget {
                         hintText: "Digite a quantidade",
                         maxWidth: (contextWidth - 70) / 2),
                     SizedBox(width: 30),
-                    DefaultFormField(
+                    DefaultDropdownField(
                         labelText: "Unidade",
-                        hintText: "KG",
+                        hintText: "(KG)",
                         maxWidth: (contextWidth - 70) / 2),
                   ],
                 ),
@@ -51,6 +57,54 @@ class ProductAddPage extends StatelessWidget {
                     SizedBox(width: 30),
                   ],
                 ),
+                ButtonDropdownField(
+                  labelText: "Categoria",
+                  hintText: "Escolha a categoria do produto",
+                  width: contextWidth - 94,
+                  onTap: () => {print("Nova Categoria")},
+                  icon: Icons.add_box,
+                ),
+                ButtonDropdownField(
+                  labelText: "Código de Barras",
+                  hintText: "Insira ou escaneie o código de barras",
+                  width: contextWidth - 94,
+                  onTap: () => {print("Escaneando...")},
+                  icon: Icons.camera_alt,
+                ),
+                Padding(
+                  padding: EdgeInsets.only(top: 20),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      GestureDetector(
+                          onTap: () => {Navigator.of(context).pop()},
+                          child: Container(
+                            decoration: BoxDecoration(
+                                color: CustomColors.RedCancel,
+                                borderRadius: BorderRadius.circular(2)),
+                            padding: EdgeInsets.symmetric(
+                                vertical: 6, horizontal: 50),
+                            child: Text("Cancelar",
+                                style: Typograph.TitleLarge.copyWith(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.w400)),
+                          )),
+                      GestureDetector(
+                          onTap: () => {print("Confirmou")},
+                          child: Container(
+                            decoration: BoxDecoration(
+                                color: CustomColors.BlueMarket,
+                                borderRadius: BorderRadius.circular(2)),
+                            padding: EdgeInsets.symmetric(
+                                vertical: 6, horizontal: 50),
+                            child: Text("Confirmar",
+                                style: Typograph.TitleLarge.copyWith(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.w400)),
+                          )),
+                    ],
+                  ),
+                )
               ],
             ))
           ],
