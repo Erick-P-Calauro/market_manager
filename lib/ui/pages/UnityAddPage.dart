@@ -5,8 +5,8 @@ import 'package:market_manager/ui/widgets/DefaultDrawer.dart';
 import 'package:market_manager/ui/widgets/DefaultFormField.dart';
 import 'package:market_manager/ui/widgets/Header.dart';
 
-class ShopAddPage extends StatelessWidget {
-  const ShopAddPage({super.key});
+class UnityAddPage extends StatelessWidget {
+  const UnityAddPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -20,18 +20,18 @@ class ShopAddPage extends StatelessWidget {
         child: Column(
           spacing: 40,
           children: [
-            Header(text: "Cadastro de Lista de Compras"),
+            Header(text: "Cadastro de Unidades de Medida"),
             Form(
               child: Column(
                 spacing: 25,
                 children: [
                   DefaultFormField(
-                      labelText: "Descrição da Compra",
-                      hintText: "Escreva uma descrição breve",
+                      labelText: "Nome da Unidade de Medida",
+                      hintText: "Escreva o nome inteiro da unidade de medida",
                       maxWidth: contextWidth),
                   DefaultFormField(
-                      labelText: "Data da Compra",
-                      hintText: "20/02/2005",
+                      labelText: "Abreviação da unidade de medida",
+                      hintText: "Escreva a abreviação da unidade (Ex: 'KG')",
                       maxWidth: contextWidth),
                   DefaultButtonRow()
                 ],

@@ -5,8 +5,8 @@ import 'package:market_manager/ui/widgets/DefaultDrawer.dart';
 import 'package:market_manager/ui/widgets/DefaultFormField.dart';
 import 'package:market_manager/ui/widgets/Header.dart';
 
-class ShopAddPage extends StatelessWidget {
-  const ShopAddPage({super.key});
+class CategoryAddPage extends StatelessWidget {
+  const CategoryAddPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -20,18 +20,14 @@ class ShopAddPage extends StatelessWidget {
         child: Column(
           spacing: 40,
           children: [
-            Header(text: "Cadastro de Lista de Compras"),
+            Header(text: "Cadastro de categorias"),
             Form(
               child: Column(
                 spacing: 25,
                 children: [
                   DefaultFormField(
-                      labelText: "Descrição da Compra",
-                      hintText: "Escreva uma descrição breve",
-                      maxWidth: contextWidth),
-                  DefaultFormField(
-                      labelText: "Data da Compra",
-                      hintText: "20/02/2005",
+                      labelText: "Nome da categoria",
+                      hintText: "Escreva o nome da categoria",
                       maxWidth: contextWidth),
                   DefaultButtonRow()
                 ],

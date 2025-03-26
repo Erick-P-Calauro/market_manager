@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:market_manager/ui/pages/CategoryAddPage.dart';
 import 'package:market_manager/ui/pages/CategoryListPage.dart';
 import 'package:market_manager/ui/pages/ProductAddPage.dart';
 import 'package:market_manager/ui/pages/ProductListPage.dart';
 import 'package:market_manager/ui/pages/SettingsPage.dart';
 import 'package:market_manager/ui/pages/ShopAddPage.dart';
 import 'package:market_manager/ui/pages/ShopListPage.dart';
+import 'package:market_manager/ui/pages/UnityAddPage.dart';
 import 'package:market_manager/ui/pages/UnityListPage.dart';
 
 class RouteGenerator {
@@ -42,6 +44,10 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (context) => ProductAddPage());
       case NewShopPage:
         return MaterialPageRoute(builder: (context) => ShopAddPage());
+      case NewCategoryPage:
+        return MaterialPageRoute(builder: (context) => CategoryAddPage());
+      case NewUnityPage:
+        return MaterialPageRoute(builder: (context) => UnityAddPage());
       case Settings:
         return MaterialPageRoute(builder: (context) => SettingsPage());
       default:
