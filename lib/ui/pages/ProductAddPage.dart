@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:market_manager/ui/widgets/ButtonDropdownField.dart';
 import 'package:market_manager/ui/widgets/DefaultAppBar.dart';
+import 'package:market_manager/ui/widgets/DefaultCheckboxField.dart';
 import 'package:market_manager/ui/widgets/DefaultDrawer.dart';
 import 'package:market_manager/ui/widgets/DefaultDropdownField.dart';
 import 'package:market_manager/ui/widgets/DefaultFormField.dart';
@@ -55,6 +56,11 @@ class ProductAddPage extends StatelessWidget {
                         hintText: "Insira o Preço",
                         maxWidth: (contextWidth - 70) / 2),
                     SizedBox(width: 30),
+                    DefaultCheckboxField(
+                      labelText: "Incluir no Carrinho ?",
+                      onChecked: () => {print("Checou")},
+                      width: (contextWidth - 70) / 2,
+                    )
                   ],
                 ),
                 ButtonDropdownField(
