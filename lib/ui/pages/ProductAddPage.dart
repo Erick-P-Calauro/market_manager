@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:market_manager/ui/widgets/ButtonDropdownField.dart';
-import 'package:market_manager/ui/widgets/DefaultAppBar.dart';
 import 'package:market_manager/ui/widgets/DefaultButtonRow.dart';
 import 'package:market_manager/ui/widgets/DefaultCheckboxField.dart';
-import 'package:market_manager/ui/widgets/DefaultDrawer.dart';
 import 'package:market_manager/ui/widgets/DefaultDropdownField.dart';
 import 'package:market_manager/ui/widgets/DefaultFormField.dart';
+import 'package:market_manager/ui/widgets/DefaultScaffold.dart';
 import '../widgets/Header.dart';
 
 class ProductAddPage extends StatelessWidget {
@@ -17,10 +16,8 @@ class ProductAddPage extends StatelessWidget {
     // dentro do container usar contextwidth - 40 por conta das padding
     double contextWidth = MediaQuery.of(context).size.width;
 
-    return Scaffold(
-      appBar: DefaultAppBar(),
-      drawer: DefaultDrawer(),
-      body: Container(
+    return DefaultScaffold(
+      child: Container(
         padding: EdgeInsets.fromLTRB(20, 40, 20, 0),
         child: Column(
           spacing: 40,

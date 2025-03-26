@@ -6,14 +6,14 @@ class ListSection extends StatelessWidget {
   const ListSection({
     super.key,
     required this.title,
-    required this.width,
   });
 
   final String title;
-  final double width;
 
   @override
   Widget build(BuildContext context) {
+    final contextWidth = MediaQuery.of(context).size.width;
+
     return SizedBox(
         child: Column(
       spacing: 15,
@@ -28,7 +28,7 @@ class ListSection extends StatelessWidget {
           children: [
             Container(
               color: CustomColors.LightGray1,
-              width: width - 40,
+              width: contextWidth - 40,
               height: 50,
               child: Text(""),
             ),
@@ -36,14 +36,14 @@ class ListSection extends StatelessWidget {
               padding: const EdgeInsets.symmetric(vertical: 5),
               child: Container(
                 color: CustomColors.LightGray1,
-                width: width - 40,
+                width: contextWidth - 40,
                 height: 50,
                 child: Text(""),
               ),
             ),
             Container(
               color: CustomColors.LightGray1,
-              width: width - 40,
+              width: contextWidth - 40,
               height: 50,
               child: Text(""),
             )

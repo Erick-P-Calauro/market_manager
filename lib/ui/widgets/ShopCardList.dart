@@ -14,6 +14,7 @@ class ShopCardList extends StatelessWidget {
       padding: EdgeInsets.fromLTRB(20, 40 - 25, 20, 0),
       child: Consumer<ShopListModel>(builder: (context, model, child) {
         return ListView(
+          shrinkWrap: true,
           children: [
             ShopCard(Id: "0", name: "Card01", total: 1250.00),
             ShopCard(Id: "1", name: "Card02", total: 3500.10),
