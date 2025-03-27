@@ -14,7 +14,7 @@ class ProductAddPage extends StatelessWidget {
   Widget build(BuildContext context) {
     // contextWidth = width do dispositivo
     // dentro do container usar contextwidth - 40 por conta das padding
-    double contextWidth = MediaQuery.of(context).size.width;
+    final contextWidth = MediaQuery.of(context).size.width;
 
     return DefaultScaffold(
       child: Container(
