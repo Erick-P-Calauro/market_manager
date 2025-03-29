@@ -23,14 +23,18 @@ class UnityAddPage extends StatelessWidget {
                 spacing: 25,
                 children: [
                   DefaultFormField(
+                      controller: null,
                       labelText: "Nome da Unidade de Medida",
                       hintText: "Escreva o nome inteiro da unidade de medida",
                       maxWidth: contextWidth),
                   DefaultFormField(
+                      controller: null,
                       labelText: "Abreviação da unidade de medida",
                       hintText: "Escreva a abreviação da unidade (Ex: 'KG')",
                       maxWidth: contextWidth),
-                  DefaultButtonRow()
+                  DefaultButtonRow(
+                    onConfirm: () => {print("Confirmou")},
+                  )
                 ],
               ),
             )

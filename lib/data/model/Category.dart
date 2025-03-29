@@ -6,4 +6,8 @@ class Category {
 
   final int id;
   final String name;
+
+  Map<String, Object?> toMap() {
+    return {'id': id, 'name': name};
+  }
 }

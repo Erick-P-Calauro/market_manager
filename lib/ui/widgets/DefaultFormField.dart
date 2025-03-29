@@ -8,8 +8,10 @@ class DefaultFormField extends StatelessWidget {
     required this.labelText,
     required this.hintText,
     required this.maxWidth,
+    required this.controller,
   });
 
+  final TextEditingController? controller;
   final String labelText;
   final String hintText;
   final double maxWidth;
@@ -19,13 +21,13 @@ class DefaultFormField extends StatelessWidget {
     return Container(
       padding: EdgeInsets.zero,
       width: maxWidth,
-      
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(labelText, style: Typograph.TitleSmall),
           SizedBox(height: 10),
           TextField(
+            controller: controller,
             style: Typograph.SubtitleLarge,
             decoration: InputDecoration(
                 hintText: hintText,

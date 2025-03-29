@@ -23,14 +23,18 @@ class ShopAddPage extends StatelessWidget {
                 spacing: 25,
                 children: [
                   DefaultFormField(
+                      controller: null,
                       labelText: "Descrição da Compra",
                       hintText: "Escreva uma descrição breve",
                       maxWidth: contextWidth),
                   DefaultFormField(
+                      controller: null,
                       labelText: "Data da Compra",
                       hintText: "20/02/2005",
                       maxWidth: contextWidth),
-                  DefaultButtonRow()
+                  DefaultButtonRow(
+                    onConfirm: () => {print("Confirmou")},
+                  )
                 ],
               ),
             )

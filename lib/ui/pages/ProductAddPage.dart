@@ -28,6 +28,7 @@ class ProductAddPage extends StatelessWidget {
               spacing: 25,
               children: [
                 DefaultFormField(
+                  controller: null,
                   labelText: "Nome do Produto",
                   hintText: "Digite o nome do Produto",
                   maxWidth: contextWidth,
@@ -35,6 +36,7 @@ class ProductAddPage extends StatelessWidget {
                 Row(
                   children: [
                     DefaultFormField(
+                        controller: null,
                         labelText: "Quantidade",
                         hintText: "Digite a quantidade",
                         maxWidth: (contextWidth - 70) / 2),
@@ -48,6 +50,7 @@ class ProductAddPage extends StatelessWidget {
                 Row(
                   children: [
                     DefaultFormField(
+                        controller: null,
                         labelText: "Preço (R\$)",
                         hintText: "Insira o Preço",
                         maxWidth: (contextWidth - 70) / 2),
@@ -73,7 +76,9 @@ class ProductAddPage extends StatelessWidget {
                   onTap: () => {print("Escaneando...")},
                   icon: Icons.camera_alt,
                 ),
-                DefaultButtonRow()
+                DefaultButtonRow(
+                  onConfirm: () => {print("Confirmou")},
+                )
               ],
             ))
           ],

@@ -3,9 +3,9 @@ import 'package:market_manager/utils/CustomColors.dart';
 import 'package:market_manager/utils/Typograph.dart';
 
 class DefaultButtonRow extends StatelessWidget {
-  const DefaultButtonRow({
-    super.key,
-  });
+  const DefaultButtonRow({super.key, required this.onConfirm()});
+
+  final Function onConfirm;
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +26,7 @@ class DefaultButtonRow extends StatelessWidget {
                         color: Colors.white, fontWeight: FontWeight.w400)),
               )),
           GestureDetector(
-              onTap: () => {print("Confirmou")},
+              onTap: () => {onConfirm()},
               child: Container(
                 decoration: BoxDecoration(
                     color: CustomColors.BlueMarket,
