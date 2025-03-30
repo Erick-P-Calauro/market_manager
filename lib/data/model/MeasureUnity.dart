@@ -5,7 +5,11 @@ class MeasureUnity {
     required this.abbreviation,
   });
 
-  final int id;
+  final int? id;
   final String name;
   final String abbreviation;
+
+  Map<String, Object?> toMap() {
+    return {"name": name, "abbreviation": abbreviation};
+  }
 }

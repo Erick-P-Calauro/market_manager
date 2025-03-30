@@ -8,9 +8,10 @@ class DatabaseService {
     final database = openDatabase(
       'database.db',
       onCreate: (db, version) {
-        return db.execute(
-          'CREATE TABLE category(id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT NOT NULL);',
-        );
+        db.execute(
+            'CREATE TABLE category(id INTEGER PRIMARY KEY AUTOINCREMENT, name VARCHAR(30) NOT NULL);');
+        db.execute(
+            'CREATE TABLE unity(id INTEGER PRIMARY KEY AUTOINCREMENT, name VARCHAR(30) NOT NULL, abbreviation VARCHAR(3) NOT NULL);');
       },
       version: 3, // Mudar depois
     );

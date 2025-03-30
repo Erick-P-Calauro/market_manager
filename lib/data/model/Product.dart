@@ -1,5 +1,5 @@
-import 'package:flutter/foundation.dart';
-import 'package:market_manager/data/model/MeasureUnity.dart';
+// import 'package:flutter/foundation.dart';
+// import 'package:market_manager/data/model/MeasureUnity.dart';
 
 class Product {
   const Product({
@@ -7,15 +7,19 @@ class Product {
     required this.name,
     required this.price,
     this.barcode,
-    required this.unity,
-    required this.category,
+    // required this.unity,
+    // required this.category,
   });
 
   final int id;
   final String name;
   final double price;
   final String? barcode;
-  //final XFile? photo;
-  final MeasureUnity unity;
-  final Category category;
+  // final XFile? photo;
+  // final MeasureUnity unity;
+  // final Category category;
+
+  Map<String, Object?> toMap() {
+    return {"name": name, "price": price, "barcode": barcode};
+  }
 }
