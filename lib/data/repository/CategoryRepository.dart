@@ -28,4 +28,31 @@ class CategoryRepository {
 
     return categories;
   }
+
+  Future<Category?> buscar(int id) async {
+    final db =  await _databaseService.getConnection();
+
+    List<Map<String, Object?>> maps = await db.query("category", where: "id = $id");
+    Category? category;
+    
+    for (final {'id': id as int, 'name': name as String} in maps) {
+      category = Category(id: id, name: name);
+    }
+
+    return category;
+  }
+
+  void editar(int id, Category category) async {
+    final db = await _databaseService.getConnection();
+
+    Category newCategory = Category(id: id, name: category.name);
+    db.insert("category", newCategory.toMap(), 
+      conflictAlgorithm: ConflictAlgorithm.abort);
+  }
+
+  void deletar(int id) async {
+    final db = await _databaseService.getConnection();
+
+    db.delete("category", where: "id = $id");
+  }
 }
