@@ -15,7 +15,7 @@ class ProductListPage extends StatelessWidget {
         child: Column(
           spacing: 40,
           children: [
-            HeaderPlus(
+            HeaderPlus<Object>(
               text: "Produtos",
               newPage: RouteGenerator.NewProductPage,
             ),

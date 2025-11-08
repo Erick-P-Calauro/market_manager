@@ -40,7 +40,7 @@ class DefaultDrawer extends StatelessWidget {
                                 style: defaultTextStyle),
                             onTap: () => {
                               Navigator.pushNamed(
-                                  context, RouteGenerator.NewShopPage)
+                                  context, RouteGenerator.NewShopPage,)
                             },
                           ),
                           ListTile(

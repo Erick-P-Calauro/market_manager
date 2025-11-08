@@ -49,8 +49,9 @@ class MeasureUnityRepository {
     final db = await _databaseService.getConnection();
 
     MeasureUnity newUnity = MeasureUnity(id: id, name: unity.name, abbreviation: unity.abbreviation);
-    db.insert("unity", newUnity.toMap(),
-      conflictAlgorithm: ConflictAlgorithm.abort);
+    db.update("unity", newUnity.toMap(),
+      conflictAlgorithm: ConflictAlgorithm.abort,
+      where: 'id = $id');
   }
 
   void deletar(int id) async {

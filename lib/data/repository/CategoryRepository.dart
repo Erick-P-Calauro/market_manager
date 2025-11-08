@@ -46,8 +46,10 @@ class CategoryRepository {
     final db = await _databaseService.getConnection();
 
     Category newCategory = Category(id: id, name: category.name);
-    db.insert("category", newCategory.toMap(), 
-      conflictAlgorithm: ConflictAlgorithm.abort);
+    
+    db.update("category", newCategory.toMap(), 
+      conflictAlgorithm: ConflictAlgorithm.abort,
+      where: 'id = $id');
   }
 
   void deletar(int id) async {

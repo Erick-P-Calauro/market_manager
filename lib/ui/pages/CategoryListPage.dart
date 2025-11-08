@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:market_manager/routes.dart';
-import 'package:market_manager/ui/model/CategoryViewModel.dart';
+import 'package:market_manager/ui/model/CategoryListViewModel.dart';
+import 'package:market_manager/ui/widgets/CategoryAddArguments.dart';
 import 'package:market_manager/ui/widgets/DefaultScaffold.dart';
 import 'package:market_manager/utils/CustomColors.dart';
+import 'package:market_manager/utils/Enums.dart';
 import 'package:market_manager/utils/Typograph.dart';
 import '../widgets/Header.dart';
 
 class CategoryListPage extends StatelessWidget {
   const CategoryListPage({super.key, required this.viewModel});
 
-  final CategoryViewModel viewModel;
+  final CategoryListViewModel viewModel;
 
   @override
   Widget build(BuildContext context) {
@@ -22,9 +24,10 @@ class CategoryListPage extends StatelessWidget {
         child: Column(
           spacing: 40,
           children: [
-            HeaderPlus(
+            HeaderPlus<CategoryAddArguments>(
               text: "Categorias",
               newPage: RouteGenerator.NewCategoryPage,
+              arguments: CategoryAddArguments(mode: AddPageState.register),
             ),
             SizedBox(
               height: contextHeight,
@@ -37,22 +40,36 @@ class CategoryListPage extends StatelessWidget {
                       return const SizedBox(height: 15);
                     },
                     itemBuilder: (BuildContext context, int index) {
-                      return Container(
-                        padding:
-                            EdgeInsets.symmetric(vertical: 13, horizontal: 20),
-                        color: CustomColors.LightGray1,
-                        width: contextWidth,
-                        child: Row(
-                          spacing: 20,
-                          children: [
-                            Icon(
-                              Icons.menu,
-                              size: 24,
-                              color: Colors.black,
-                            ),
-                            Text(viewModel.categories[index].name,
-                                style: Typograph.TitleSmall)
-                          ],
+                      return GestureDetector(
+                        onTap: () => {
+                          Navigator.of(context)
+                            .pushNamed(
+                              RouteGenerator.NewCategoryPage, 
+                              arguments: CategoryAddArguments(mode: AddPageState.edit, categoryId: viewModel.categories[index].id)
+                            )
+                        },
+
+                        onLongPress: () => {
+                          print("Segurou")
+                        },
+
+                        child: Container(
+                          padding:
+                              EdgeInsets.symmetric(vertical: 13, horizontal: 20),
+                          color: CustomColors.LightGray1,
+                          width: contextWidth,
+                          child: Row(
+                            spacing: 20,
+                            children: [
+                              Icon(
+                                Icons.menu,
+                                size: 24,
+                                color: Colors.black,
+                              ),
+                              Text(viewModel.categories[index].name,
+                                  style: Typograph.TitleSmall)
+                            ],
+                          ),
                         ),
                       );
                     },

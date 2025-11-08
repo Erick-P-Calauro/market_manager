@@ -23,7 +23,7 @@ class UnityListPage extends StatelessWidget {
         child: Column(
           spacing: 40,
           children: [
-            HeaderPlus(
+            HeaderPlus<Object>(
               text: "Unidades de Medida",
               newPage: RouteGenerator.NewUnityPage,
             ),

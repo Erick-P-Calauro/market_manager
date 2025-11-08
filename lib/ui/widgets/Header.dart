@@ -23,11 +23,12 @@ class Header extends StatelessWidget {
   }
 }
 
-class HeaderPlus extends StatelessWidget {
-  const HeaderPlus({super.key, required this.text, required this.newPage});
+class HeaderPlus <T> extends StatelessWidget {
+  const HeaderPlus({super.key, required this.text, required this.newPage, this.arguments});
 
   final String text;
   final String newPage;
+  final T? arguments;
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +51,7 @@ class HeaderPlus extends StatelessWidget {
         ),
         SizedBox(
           child: GestureDetector(
-              onTap: () => {Navigator.pushNamed(context, newPage)},
+              onTap: () => {Navigator.pushNamed(context, newPage, arguments: arguments)},
               child: Icon(Icons.add, size: 24, color: Colors.black)),
         )
       ],
