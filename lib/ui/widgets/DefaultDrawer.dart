@@ -43,18 +43,6 @@ class DefaultDrawer extends StatelessWidget {
                                   context, RouteGenerator.NewShopPage,)
                             },
                           ),
-                          ListTile(
-                              leading: Icon(
-                                Icons.shopping_basket,
-                                color: Colors.black,
-                                size: 30,
-                              ),
-                              title: Text("Registrar Produto",
-                                  style: defaultTextStyle),
-                              onTap: () => {
-                                    Navigator.pushNamed(context,
-                                        RouteGenerator.NewProductPage)
-                                  }),
                         ],
                       )),
                   Divider(color: Colors.black, height: 0),

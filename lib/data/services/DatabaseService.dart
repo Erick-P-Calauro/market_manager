@@ -61,11 +61,8 @@ void createDatabaseEntities(Batch batch) {
       id INTEGER PRIMARY KEY AUTOINCREMENT, 
       name VARCHAR(30) NOT NULL,
       category INTEGER
-      price NUMERIC(10,2) NOT NULL,
-      unity INTEGER,
       barcode VARCHAR(20),
       FOREIGN KEY (category) REFERENCES category(id),
-      FOREIGN KEY (unity) REFERENCES unity(id)
     );
   ''');
 

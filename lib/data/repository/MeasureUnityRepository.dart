@@ -45,18 +45,18 @@ class MeasureUnityRepository {
     return unity;
   }
 
-  void editar(int id, MeasureUnity unity) async {
+  Future<void> editar(int id, MeasureUnity unity) async {
     final db = await _databaseService.getConnection();
 
     MeasureUnity newUnity = MeasureUnity(id: id, name: unity.name, abbreviation: unity.abbreviation);
-    db.update("unity", newUnity.toMap(),
+    await db.update("unity", newUnity.toMap(),
       conflictAlgorithm: ConflictAlgorithm.abort,
       where: 'id = $id');
   }
 
-  void deletar(int id) async {
+  Future<void> deletar(int id) async {
     final db = await _databaseService.getConnection();
 
-    db.delete("unity", where: "id = $id");
+    await db.delete("unity", where: "id = $id");
   }
 }

@@ -5,13 +5,16 @@ import 'package:market_manager/ui/widgets/DefaultScaffold.dart';
 import 'package:market_manager/ui/widgets/Header.dart';
 
 class ShopAddPage extends StatelessWidget {
-  const ShopAddPage({super.key});
+  ShopAddPage({super.key});
+
+  final ScrollController scrollController = ScrollController();
 
   @override
   Widget build(BuildContext context) {
     final contextWidth = MediaQuery.of(context).size.width;
 
     return DefaultScaffold(
+      controller: scrollController,
       child: Container(
         padding: EdgeInsets.fromLTRB(20, 40, 20, 0),
         child: Column(

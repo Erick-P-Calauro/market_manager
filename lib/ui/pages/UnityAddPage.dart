@@ -8,24 +8,25 @@ import 'package:market_manager/ui/widgets/DefaultScaffold.dart';
 import 'package:market_manager/ui/widgets/Header.dart';
 
 class UnityAddPage extends StatelessWidget {
-  const UnityAddPage({super.key, required this.viewModel});
+  UnityAddPage({super.key, required this.viewModel});
 
   final MeasureUnityViewModel viewModel;
+  final ScrollController scrollController = ScrollController();
+  final nameController = TextEditingController();
+  final abbreviationController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     final contextWidth = MediaQuery.of(context).size.width;
 
-    final nameController = TextEditingController();
-    final abbreviationController = TextEditingController();
-
     return DefaultScaffold(
+      controller: scrollController,
       child: Container(
         padding: EdgeInsets.fromLTRB(20, 40, 20, 0),
         child: Column(
           spacing: 40,
           children: [
-            Header(text: "Cadastro de Unidades de Medida"),
+            Header(text: "Cadastro de Unidades"),
             Form(
               child: Column(
                 spacing: 25,

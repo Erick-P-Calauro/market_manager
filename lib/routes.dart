@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:market_manager/data/repository/CategoryRepository.dart';
+import 'package:market_manager/data/repository/ProductRepository.dart';
 import 'package:market_manager/ui/model/CategoryAddViewModel.dart';
 import 'package:market_manager/ui/model/CategoryListViewModel.dart';
 import 'package:market_manager/ui/model/MeasureUnityViewModel.dart';
+import 'package:market_manager/ui/model/ProductAddViewModel.dart';
+import 'package:market_manager/ui/model/ProductViewModel.dart';
 import 'package:market_manager/ui/pages/CategoryAddPage.dart';
 import 'package:market_manager/ui/pages/CategoryListPage.dart';
 import 'package:market_manager/ui/pages/ProductAddPage.dart';
@@ -38,9 +42,14 @@ class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
       case InitialPage:
-        return MaterialPageRoute(builder: (context) => const ShopListPage());
+        return MaterialPageRoute(builder: (context) => ShopListPage());
       case ListProductPage:
-        return MaterialPageRoute(builder: (context) => ProductListPage());
+        return MaterialPageRoute(builder: (context) => ProductListPage(
+          viewModel: ProductViewModel(
+            context.read(), // 
+            context.read()
+          ),
+        ));
       case ListCategoryPage:
         return MaterialPageRoute(
             builder: (context) => CategoryListPage(
@@ -50,7 +59,12 @@ class RouteGenerator {
             builder: (context) => UnityListPage(
                   viewModel: MeasureUnityViewModel(unityRepository: context.read())));
       case NewProductPage:
-        return MaterialPageRoute(builder: (context) => ProductAddPage());
+        return MaterialPageRoute(builder: (context) => ProductAddPage(
+          viewModel: ProductAddViewModel(
+            context.read<ProductRepository>(), // productRepository
+            context.read<CategoryRepository>(), // categoryRepository
+          ),
+        ));
       case NewShopPage:
         return MaterialPageRoute(builder: (context) => ShopAddPage());
       case NewCategoryPage:

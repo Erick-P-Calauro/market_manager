@@ -25,6 +25,7 @@ class CategoryAddPageState extends State<CategoryAddPage> {
   CategoryAddPageState();
 
   final categoryController = TextEditingController();
+  final scrollController = ScrollController();
 
   @override
   void initState() {
@@ -44,6 +45,7 @@ class CategoryAddPageState extends State<CategoryAddPage> {
     final contextWidth = MediaQuery.of(context).size.width;
 
     return DefaultScaffold(
+      controller: scrollController,
       child: Container(
         padding: EdgeInsets.fromLTRB(20, 40, 20, 0),
         child: Column(

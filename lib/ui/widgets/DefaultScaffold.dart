@@ -6,16 +6,26 @@ class DefaultScaffold extends StatelessWidget {
   const DefaultScaffold({
     super.key,
     required this.child,
+    required this.controller
   });
 
   final Widget child;
+  final ScrollController controller;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: DefaultAppBar(),
       drawer: DefaultDrawer(),
-      body: SingleChildScrollView(child: child),
+      body: SafeArea(
+        child: Padding(
+          padding: EdgeInsetsGeometry.only(bottom: 10),
+          child: SingleChildScrollView(
+            controller: controller ,
+            child: child
+          ),
+        ),
+      ),
     );
   }
 }

@@ -12,6 +12,10 @@ class ShopCardList extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
         padding: EdgeInsets.fromLTRB(20, 40 - 25, 20, 0),
-        child: ListView(shrinkWrap: true, children: children));
+        child: ListView(
+          shrinkWrap: true, 
+          physics: const NeverScrollableScrollPhysics(),
+          children: children
+        ));
   }
 }
