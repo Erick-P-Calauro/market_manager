@@ -1,16 +1,12 @@
 import 'package:market_manager/data/model/Category.dart';
 import 'package:market_manager/data/model/Product.dart';
-import 'package:market_manager/data/repository/CategoryRepository.dart';
 import 'package:market_manager/data/services/DatabaseService.dart';
 import 'package:sqflite/sqflite.dart';
 
 class ProductRepository {
-  ProductRepository(
-    this._databaseService, 
-    this._categoryRepository, );
+  ProductRepository(this._databaseService);
 
   final DatabaseService _databaseService;
-  final CategoryRepository _categoryRepository;
   final String table = "product";
 
   void cadastrar(Product product) async {
@@ -22,19 +18,17 @@ class ProductRepository {
   Future<List<Product>> listar() async {
     final db = await _databaseService.getConnection();
 
-    List<Map<String, Object?>> maps = await db.query(table);
+    List<Map<String, Object?>> maps = await db.rawQuery("SELECT product.id AS id, product.name AS name, barcode, category.id AS category_id, category.name AS category_name FROM product LEFT JOIN category ON product.category = category.id");
     List<Product> products = [];
     
     for(final {
       "id": id as int,
       "name": name as String,
       "barcode": barcode as String,
-      "category": category_id as int,
+      "category_id": categoryId as int,
+      "category_name": categoryName as String
     } in maps) {
-
-      Category? category = await _categoryRepository.buscar(category_id);
-
-      products.add(Product(id: id, name: name, barcode: barcode, category: category!));
+      products.add(Product(id: id, name: name, barcode: barcode, category: Category(id: categoryId, name: categoryName)));
     }
 
     return products;
@@ -43,19 +37,18 @@ class ProductRepository {
   Future<List<Product>> listarPorCategoria(int id) async {
     final db = await _databaseService.getConnection();
 
-    List<Map<String, Object?>> maps = await db.query(table, where: "category = $id");
+    List<Map<String, Object?>> maps = await db.rawQuery("SELECT product.id AS id, product.name AS name, barcode, category.id AS category_id, category.name AS category_name FROM product INNER JOIN category ON product.category = category.id WHERE product.category = $id");
     List<Product> products = [];
-    
+
     for(final {
       "id": id as int,
       "name": name as String,
       "barcode": barcode as String,
-      "category": category_id as int,
+      "category_id": categoryId as int,
+      "category_name": categoryName as String
     } in maps) {
 
-      Category? category = await _categoryRepository.buscar(category_id);
-
-      products.add(Product(id: id, name: name, barcode: barcode, category: category!));
+      products.add(Product(id: id, name: name, barcode: barcode, category: Category(id: categoryId, name: categoryName)));
     }
 
     return products;
@@ -64,19 +57,17 @@ class ProductRepository {
   Future<Product?> buscar(int id) async {
     final db = await _databaseService.getConnection();
 
-    List<Map<String, Object?>> maps = await db.query(table, where: "id = $id");
+    List<Map<String, Object?>> maps = await db.rawQuery("SELECT product.id AS id, product.name AS name, barcode, category.id AS category_id, category.name AS category_name FROM product LEFT JOIN category ON product.category = category.id WHERE product.id = $id");
     Product? product;
 
     for(final {
       "id": id as int,
       "name": name as String,
       "barcode": barcode as String,
-      "category": category_id as int,
+      "category_id": categoryId as int,
+      "category_name": categoryName as String
     } in maps) {
-
-      Category? category = await _categoryRepository.buscar(category_id);
-
-      product = Product(id: id, name: name, barcode: barcode, category: category!);
+      product = Product(id: id, name: name, barcode: barcode, category: Category(id: categoryId, name: categoryName));
     }
 
     return product;

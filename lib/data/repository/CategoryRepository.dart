@@ -28,6 +28,20 @@ class CategoryRepository {
     return categories;
   }
 
+  Future<List<Category>> listarCategoriasComProdutos() async {
+    final db = await _databaseService.getConnection();
+
+    List<Map<String, Object?>> maps = await db.rawQuery("SELECT category.id AS id, category.name AS name FROM category INNER JOIN product ON category.id = product.category GROUP BY category.name");
+    List<Category> categories = [];
+
+    // Map<String, Object?> => Category
+    for (final {'id': id as int, 'name': name as String} in maps) {
+      categories.add(Category(id: id, name: name));
+    }
+
+    return categories;
+  }
+
   Future<Category?> buscar(int id) async {
     final db =  await _databaseService.getConnection();
 

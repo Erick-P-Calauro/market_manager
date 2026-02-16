@@ -1,29 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:market_manager/data/model/Category.dart';
 import 'package:market_manager/data/model/Product.dart';
+import 'package:market_manager/data/repository/CategoryRepository.dart';
 import 'package:market_manager/data/repository/ProductRepository.dart';
-import 'package:market_manager/data/services/CategoryService.dart';
-
 class ProductViewModel extends ChangeNotifier {
   ProductViewModel(
     this._productRepository,
-    this._categoryService
+    this._categoryRepository
   ){
     _load();
   }
 
   final ProductRepository _productRepository;
-  final CategoryService _categoryService;
+  final CategoryRepository _categoryRepository;
   
   List<List<Product>> _products = [];
   List<Category> _categories = [];
 
   void _load() async {
-    _categories = await _categoryService.listarCategoriasComProdutos();
+    _categories = await _categoryRepository.listarCategoriasComProdutos();
 
     for(Category cat in _categories) {
-      List<Product> cat_products = await _productRepository.listarPorCategoria(cat.id);
-      _products.add(cat_products);
+      List<Product> catProducts = await _productRepository.listarPorCategoria(cat.id);
+      _products.add(catProducts);
     }
 
     notifyListeners();
