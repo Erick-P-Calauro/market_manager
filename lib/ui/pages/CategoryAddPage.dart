@@ -7,38 +7,19 @@ import 'package:market_manager/ui/widgets/DefaultScaffold.dart';
 import 'package:market_manager/ui/widgets/Header.dart';
 import 'package:market_manager/utils/Enums.dart';
 
-class CategoryAddPage extends StatefulWidget {
-  
-  const CategoryAddPage({super.key, required this.viewModel, required this.mode, this.categoryId});
+class CategoryAddPage extends StatelessWidget {
+  CategoryAddPage(
+      {super.key,
+      required this.viewModel,
+      required this.mode,
+      this.categoryId});
 
   final CategoryAddViewModel viewModel; // Injetado via contexto
   final AddPageState mode; // Passado por argumento na rota
   final int? categoryId; // Passado por argumento na rota
-  
-  @override
-  State<StatefulWidget> createState() {
-    return CategoryAddPageState();
-  }
-}
-
-class CategoryAddPageState extends State<CategoryAddPage> {
-  CategoryAddPageState();
 
   final categoryController = TextEditingController();
   final scrollController = ScrollController();
-
-  @override
-  void initState() {
-    super.initState();
-
-    if(widget.mode == AddPageState.edit) {
-      widget.viewModel.carregarCategoria(widget.categoryId!).then((category) => {
-        if(category != null) {
-          categoryController.text = widget.viewModel.category!.name
-        }
-      });
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -52,36 +33,46 @@ class CategoryAddPageState extends State<CategoryAddPage> {
           spacing: 40,
           children: [
             Header(text: "Cadastro de categorias"),
-            Form(
-              child: Column(
-                spacing: 25,
-                children: [
-                  DefaultFormField(
-                      controller: categoryController,
-                      labelText: "Nome da categoria",
-                      hintText: "Escreva o nome da categoria",
-                      maxWidth: contextWidth),
-                  DefaultButtonRow(
-                    onConfirm: () => {
-                      if(widget.mode == AddPageState.register) {
-                        widget.viewModel.cadastrarCategoria(categoryController.text),
-                        Navigator.of(context)
-                            .pushNamed(RouteGenerator.ListCategoryPage)
-                      },
+            ListenableBuilder(
+              listenable: viewModel,
+              builder: (context, child) {
+                if(mode == AddPageState.edit) {
+                  viewModel.carregarCategoria(categoryId!).then((cat) => {
+                    categoryController.text = cat!.name
+                  });
+                }
 
-                      if(widget.mode == AddPageState.edit) {
-                        widget.viewModel.editarCategoria(categoryController.text, widget.categoryId!),
-                        Navigator.of(context)
-                            .pushNamed(RouteGenerator.ListCategoryPage)
-                      }
-                    },
-                  )
-                ],
-              ),
+                return Form(
+                  child: Column(
+                    spacing: 25,
+                    children: [
+                      DefaultFormField(
+                          controller: categoryController,
+                          labelText: "Nome da categoria",
+                          hintText: "Escreva o nome da categoria",
+                          maxWidth: contextWidth),
+                      DefaultButtonRow(
+                        onConfirm: () => {
+                          if (mode == AddPageState.register){
+                            viewModel.cadastrarCategoria(categoryController.text),
+                            Navigator.of(context).pushNamed(RouteGenerator.ListCategoryPage)
+                          },
+                          
+                          if(mode == AddPageState.edit){
+                            viewModel.editarCategoria(categoryController.text, categoryId!),
+                            Navigator.of(context).pushNamed(RouteGenerator.ListCategoryPage)
+                          }
+                        },
+                      )
+                    ],
+                  ),
+                );
+              }
             )
           ],
         ),
       ),
     );
   }
+  
 }
