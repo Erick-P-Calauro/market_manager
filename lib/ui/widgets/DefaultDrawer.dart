@@ -25,26 +25,41 @@ class DefaultDrawer extends StatelessWidget {
                 padding: EdgeInsets.all(0),
                 children: [
                   Container(
-                      padding: defaultPadding,
-                      child: Column(
-                        spacing: defaultSpacing,
-                        children: [
-                          ListTile(
-                            horizontalTitleGap: 10,
-                            leading: Icon(
-                              Icons.shopping_cart,
-                              color: Colors.black,
-                              size: 30,
-                            ),
-                            title: Text("Adicionar Lista",
-                                style: defaultTextStyle),
-                            onTap: () => {
-                              Navigator.pushNamed(
-                                  context, RouteGenerator.NewShopPage,)
-                            },
+                    padding: defaultPadding,
+                    child: Column(
+                      spacing: defaultSpacing,
+                      children: [
+                        ListTile(
+                          horizontalTitleGap: 10,
+                          leading: Icon(
+                            Icons.house,
+                            color: Colors.black,
+                            size: 30,
                           ),
-                        ],
-                      )),
+                          title: Text("Página Inicial",
+                              style: defaultTextStyle),
+                          onTap: () => {
+                            Navigator.pushNamed(
+                                context, RouteGenerator.InitialPage)
+                          },
+                        ),
+                        ListTile(
+                          horizontalTitleGap: 10,
+                          leading: Icon(
+                            Icons.shopping_cart,
+                            color: Colors.black,
+                            size: 30,
+                          ),
+                          title: Text("Adicionar Lista",
+                              style: defaultTextStyle),
+                          onTap: () => {
+                            Navigator.pushNamed(
+                                context, RouteGenerator.NewShopPage,)
+                          },
+                        ),
+                      ],
+                    )
+                  ),
                   Divider(color: Colors.black, height: 0),
                   Container(
                     padding: defaultPadding,
