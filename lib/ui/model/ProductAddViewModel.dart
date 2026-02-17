@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:market_manager/data/DTOs/ProductSave.dart';
 import 'package:market_manager/data/model/Category.dart';
 import 'package:market_manager/data/model/Product.dart';
 import 'package:market_manager/data/repository/CategoryRepository.dart';
@@ -21,6 +22,8 @@ class ProductAddViewModel extends ChangeNotifier {
   void _load() async {
     _products = await _productRepository.listar();
     _categories = await _categoryRepository.listar();
+
+    print(_categories);
     
     notifyListeners();
   }
@@ -32,7 +35,7 @@ class ProductAddViewModel extends ChangeNotifier {
     }
 
     Category? categoria = await _categoryRepository.buscarPorNome(categoryName);
-    _productRepository.cadastrar(Product.cadastro(name, categoria!, barcode));
+    _productRepository.cadastrar(ProductSave(name, categoria!, barcode));
 
     notifyListeners();
   }

@@ -1,18 +1,15 @@
 import 'package:market_manager/data/model/Category.dart';
 
-class Product {
-  const Product(
-    this.id,
+class ProductSave {
+  const ProductSave(
     this.name,
     this.category,
-    this.barcode,
+    this.barcode
   );
 
-  final int id;
   final String name;
-  final String barcode;
   final Category category;
-  // final XFile? photo;
+  final String barcode;
 
   Map<String, Object?> toMap() {
     return { "name": name, "barcode": barcode, "category": category.id };

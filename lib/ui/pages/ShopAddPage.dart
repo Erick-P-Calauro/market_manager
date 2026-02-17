@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:market_manager/data/model/Shop.dart';
+import 'package:market_manager/data/DTOs/ShopSave.dart';
 import 'package:market_manager/routes.dart';
 import 'package:market_manager/ui/model/ShopAddPageModel.dart';
 import 'package:market_manager/ui/widgets/DefaultButtonRow.dart';
@@ -52,7 +52,7 @@ class ShopAddPage extends StatelessWidget {
                       List<int> dateParts = date.split("/").map((d) => int.parse(d)).toList();
                       DateTime formatedDate = DateTime(dateParts[2], dateParts[1], dateParts[0]);
 
-                      viewModel.cadastrar(Shop.cadastro(nameController.text, formatedDate));
+                      viewModel.cadastrar(ShopSave(nameController.text, formatedDate));
 
                       limparCampos();
 

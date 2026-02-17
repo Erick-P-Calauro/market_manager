@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:market_manager/data/model/Shop.dart';
+import 'package:market_manager/data/DTOs/ShopDetailed.dart';
 import 'package:market_manager/routes.dart';
 import 'package:market_manager/ui/model/ShopListModel.dart';
 import 'package:market_manager/ui/widgets/RouteArguments/ShopDetailedArguments.dart';
@@ -14,7 +14,7 @@ class ShopCard extends StatelessWidget {
   });
 
   // Detailed Shop
-  final Shop shop;
+  final ShopDetailed shop;
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +31,7 @@ class CloseShopCard extends StatelessWidget {
     required this.shop
   });
 
-  final Shop shop;
+  final ShopDetailed shop;
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +55,7 @@ class CloseShopCard extends StatelessWidget {
                   children: [
                     Text(shop.name, style: Typograph.TitleSmall),
                     SizedBox(width: 20),
-                    Text("Total : R\$ ${shop.total!.toStringAsFixed(2)}",
+                    Text("Total : R\$ ${shop.total.toStringAsFixed(2)}",
                         style: Typograph.BodyLarge),
                   ],
                 ),
@@ -77,7 +77,7 @@ class OpenShopCard extends StatelessWidget {
     required this.shop
   });
 
-  final Shop shop;
+  final ShopDetailed shop;
 
   @override
   Widget build(BuildContext context) {
@@ -126,12 +126,12 @@ class OpenShopCard extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          "Total : R\$ ${shop.total!.toStringAsFixed(2)}",
+                          "Total : R\$ ${shop.total.toStringAsFixed(2)}",
                           style: Typograph.SubtitleLarge,
                         ),
                         GestureDetector(
                           onTap: () => {
-                            Navigator.pushNamed(context, RouteGenerator.DetailShopPage, arguments: ShopDetailedArguments(shopId: shop.id!))
+                            Navigator.pushNamed(context, RouteGenerator.DetailShopPage, arguments: ShopDetailedArguments(shopId: shop.id))
                           },
                           child: Container(
                             padding: EdgeInsets.symmetric(

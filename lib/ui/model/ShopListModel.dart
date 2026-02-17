@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:market_manager/data/model/Shop.dart';
+import 'package:market_manager/data/DTOs/ShopDetailed.dart';
 import 'package:market_manager/data/repository/ShopRepository.dart';
 
 class ShopListModel extends ChangeNotifier {
@@ -8,7 +8,7 @@ class ShopListModel extends ChangeNotifier {
   }
 
   final ShopRepository _shopRepository;
-  List<Shop> _shopList = [];
+  List<ShopDetailed> _shopList = [];
 
   // Shop load Logic
   void _load() async {
@@ -16,7 +16,7 @@ class ShopListModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  List<Shop> get shopList => _shopList;
+  List<ShopDetailed> get shopList => _shopList;
 
   // ShopCard Manipulation Logic
   int? activeId;

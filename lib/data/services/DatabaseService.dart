@@ -12,8 +12,6 @@ class DatabaseService {
       onCreate: (db, version) async {
         Batch batch = db.batch();
         createDatabaseEntities(batch);
-        
-        print("\nDatabase created ($version)\n");
 
         await batch.commit();
       },
@@ -21,8 +19,6 @@ class DatabaseService {
       onUpgrade: (db, oldVersion, newVersion) async {
         Batch batch = db.batch();
         createDatabaseEntities(batch); 
-        
-        print("\nDatabase upgraded ($oldVersion : $newVersion)\n");
 
         await batch.commit();
       },
@@ -60,7 +56,7 @@ void createDatabaseEntities(Batch batch) {
     CREATE TABLE IF NOT EXISTS product(
       id INTEGER PRIMARY KEY AUTOINCREMENT, 
       name VARCHAR(30) NOT NULL,
-      category INTEGER
+      category INTEGER,
       barcode VARCHAR(20),
       FOREIGN KEY (category) REFERENCES category(id)
     );

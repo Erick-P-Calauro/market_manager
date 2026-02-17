@@ -1,17 +1,14 @@
-class Shop {
-  Shop({
-    required this.id,
-    required this.name,
-    required this.date,
-  });
+class ShopSave {
+  const ShopSave(
+    this.name,
+    this.date
+  );
 
-  int? id;
   final String name;
   final DateTime date;
 
   Map<String, Object?> toMap() {
     return {
-      'id': id,
       'name': name,
       'date': date.microsecondsSinceEpoch
     };

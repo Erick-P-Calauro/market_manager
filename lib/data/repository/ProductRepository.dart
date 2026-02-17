@@ -1,3 +1,4 @@
+import 'package:market_manager/data/DTOs/ProductSave.dart';
 import 'package:market_manager/data/model/Category.dart';
 import 'package:market_manager/data/model/Product.dart';
 import 'package:market_manager/data/services/DatabaseService.dart';
@@ -9,7 +10,7 @@ class ProductRepository {
   final DatabaseService _databaseService;
   final String table = "product";
 
-  void cadastrar(Product product) async {
+  void cadastrar(ProductSave product) async {
     final db = await _databaseService.getConnection();
 
     await db.insert(table, product.toMap(), conflictAlgorithm: ConflictAlgorithm.abort);
@@ -18,7 +19,7 @@ class ProductRepository {
   Future<List<Product>> listar() async {
     final db = await _databaseService.getConnection();
 
-    List<Map<String, Object?>> maps = await db.rawQuery("SELECT product.id AS id, product.name AS name, barcode, category.id AS category_id, category.name AS category_name FROM product LEFT JOIN category ON product.category = category.id");
+    List<Map<String, Object?>> maps = await db.rawQuery("SELECT product.id AS id, product.name AS name, product.barcode AS barcode, category.id AS category_id, category.name AS category_name FROM product LEFT JOIN category ON product.category = category.id");
     List<Product> products = [];
     
     for(final {
@@ -28,7 +29,7 @@ class ProductRepository {
       "category_id": categoryId as int,
       "category_name": categoryName as String
     } in maps) {
-      products.add(Product(id: id, name: name, barcode: barcode, category: Category(id: categoryId, name: categoryName)));
+      products.add(Product(id, name, Category(id: categoryId, name: categoryName), barcode));
     }
 
     return products;
@@ -48,7 +49,7 @@ class ProductRepository {
       "category_name": categoryName as String
     } in maps) {
 
-      products.add(Product(id: id, name: name, barcode: barcode, category: Category(id: categoryId, name: categoryName)));
+      products.add(Product(id, name, Category(id: categoryId, name: categoryName), barcode));
     }
 
     return products;
@@ -67,7 +68,7 @@ class ProductRepository {
       "category_id": categoryId as int,
       "category_name": categoryName as String
     } in maps) {
-      product = Product(id: id, name: name, barcode: barcode, category: Category(id: categoryId, name: categoryName));
+      product = Product(id, name, Category(id: categoryId, name: categoryName), barcode);
     }
 
     return product;
@@ -76,7 +77,7 @@ class ProductRepository {
   Future<void> editar(int id, Product product) async {
     final db = await _databaseService.getConnection();
 
-    Product nProduct = Product.flex(id, product.name, product.category, product.barcode);
+    Product nProduct = Product(id, product.name, product.category, product.barcode);
     
     await db.update(table, nProduct.toMap(),
       conflictAlgorithm: ConflictAlgorithm.abort,

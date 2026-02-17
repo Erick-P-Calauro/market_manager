@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:market_manager/data/model/Shop.dart';
+import 'package:market_manager/data/DTOs/ShopSave.dart';
 import 'package:market_manager/data/repository/ShopRepository.dart';
 
 class ShopAddPageModel extends ChangeNotifier{
@@ -7,7 +7,7 @@ class ShopAddPageModel extends ChangeNotifier{
 
   final ShopRepository _shopRepository;
 
-  void cadastrar(Shop shop) async {
+  void cadastrar(ShopSave shop) async {
     _shopRepository.cadastrar(shop);
 
     notifyListeners();
