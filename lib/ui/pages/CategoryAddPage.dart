@@ -15,6 +15,7 @@ class CategoryAddPage extends StatelessWidget {
       this.categoryId});
 
   final CategoryAddViewModel viewModel; // Injetado via contexto
+  
   final AddPageState mode; // Passado por argumento na rota
   final int? categoryId; // Passado por argumento na rota
 
@@ -41,7 +42,6 @@ class CategoryAddPage extends StatelessWidget {
                     categoryController.text = cat!.name
                   });
                 }
-
                 return Form(
                   child: Column(
                     spacing: 25,
@@ -57,7 +57,7 @@ class CategoryAddPage extends StatelessWidget {
                             viewModel.cadastrarCategoria(categoryController.text),
                             Navigator.of(context).pushNamed(RouteGenerator.ListCategoryPage)
                           },
-                          
+
                           if(mode == AddPageState.edit){
                             viewModel.editarCategoria(categoryController.text, categoryId!),
                             Navigator.of(context).pushNamed(RouteGenerator.ListCategoryPage)

@@ -12,10 +12,12 @@ import 'package:market_manager/ui/pages/ProductAddPage.dart';
 import 'package:market_manager/ui/pages/ProductListPage.dart';
 import 'package:market_manager/ui/pages/SettingsPage.dart';
 import 'package:market_manager/ui/pages/ShopAddPage.dart';
+import 'package:market_manager/ui/pages/ShopDetailedPage.dart';
 import 'package:market_manager/ui/pages/ShopListPage.dart';
 import 'package:market_manager/ui/pages/UnityAddPage.dart';
 import 'package:market_manager/ui/pages/UnityListPage.dart';
-import 'package:market_manager/ui/widgets/CategoryAddArguments.dart';
+import 'package:market_manager/ui/widgets/RouteArguments/CategoryAddArguments.dart';
+import 'package:market_manager/ui/widgets/RouteArguments/ShopDetailedArguments.dart';
 import 'package:provider/provider.dart';
 
 class RouteGenerator {
@@ -34,7 +36,7 @@ class RouteGenerator {
   static const String NewUnityPage = "/unity/new";
 
   // Special Pages
-  static const String AddProductShopPage = "/shop/add";
+  static const String DetailShopPage = "/shop/detail";
   static const String Settings = "/settings";
 
   RouteGenerator();
@@ -69,6 +71,7 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (context) => ShopAddPage());
       case NewCategoryPage:
         final args = settings.arguments as CategoryAddArguments;
+        
         return MaterialPageRoute(
           builder: (context) => CategoryAddPage(
             viewModel: CategoryAddViewModel(categoryRepository: context.read()),
@@ -80,6 +83,12 @@ class RouteGenerator {
         return MaterialPageRoute(
             builder: (context) => UnityAddPage(
                   viewModel: MeasureUnityViewModel(unityRepository: context.read())));
+      case DetailShopPage:
+        final args = settings.arguments as ShopDetailedArguments;
+        
+        return MaterialPageRoute(
+          builder: (context) => ShopDetailedPage(shopId: args.shopId)
+        );
       case Settings:
         return MaterialPageRoute(builder: (context) => SettingsPage());
       default:

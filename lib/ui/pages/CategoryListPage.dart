@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:market_manager/routes.dart';
 import 'package:market_manager/ui/model/CategoryListViewModel.dart';
-import 'package:market_manager/ui/widgets/CategoryAddArguments.dart';
 import 'package:market_manager/ui/widgets/DefaultScaffold.dart';
+import 'package:market_manager/ui/widgets/RouteArguments/CategoryAddArguments.dart';
 import 'package:market_manager/utils/CustomColors.dart';
 import 'package:market_manager/utils/Enums.dart';
 import 'package:market_manager/utils/Typograph.dart';
