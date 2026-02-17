@@ -71,7 +71,7 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (context) => ShopAddPage());
       case NewCategoryPage:
         final args = settings.arguments as CategoryAddArguments;
-        
+
         return MaterialPageRoute(
           builder: (context) => CategoryAddPage(
             viewModel: CategoryAddViewModel(categoryRepository: context.read()),

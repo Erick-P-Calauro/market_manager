@@ -14,7 +14,7 @@ class ShopCard extends StatelessWidget {
     required this.total,
   });
 
-  final String id;
+  final int id;
   final String name;
   final double total;
 
@@ -35,7 +35,7 @@ class CloseShopCard extends StatelessWidget {
     required this.total,
   });
   
-  final String id;
+  final int id;
   final String name;
   final double total;
 
@@ -59,7 +59,7 @@ class CloseShopCard extends StatelessWidget {
               children: [
                 Row(
                   children: [
-                    Text("DEZEMBRO / $name", style: Typograph.TitleSmall),
+                    Text(name, style: Typograph.TitleSmall),
                     SizedBox(width: 20),
                     Text("Total : R\$ ${total.toStringAsFixed(2)}",
                         style: Typograph.BodyLarge),
@@ -85,7 +85,7 @@ class OpenShopCard extends StatelessWidget {
     required this.total,
   });
 
-  final String id;
+  final int id;
   final String name;
   final double total;
 
@@ -110,7 +110,7 @@ class OpenShopCard extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text("DEZEMBRO / $name", style: Typograph.TitleSmall),
+                    Text(name, style: Typograph.TitleSmall),
                     Icon(
                       Icons.keyboard_arrow_down,
                       size: 24,

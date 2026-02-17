@@ -1,15 +1,32 @@
 import 'package:flutter/material.dart';
+import 'package:market_manager/data/model/Shop.dart';
+import 'package:market_manager/data/repository/ShopRepository.dart';
 
 class ShopListModel extends ChangeNotifier {
-  String? activeId;
+  ShopListModel(this._shopRepository){
+    _load();
+  }
 
-  void changeId(String? Id) {
-    this.activeId = Id;
+  final ShopRepository _shopRepository;
+  List<Shop> _shopList = [];
+
+  // Shop load Logic
+  void _load() async {
+    _shopList = await _shopRepository.listar();
+  }
+
+  List<Shop> get shopList => _shopList;
+
+  // ShopCard Manipulation Logic
+  int? activeId;
+
+  void changeId(int? id) {
+    activeId = id;
 
     notifyListeners();
   }
 
-  String? getId() {
+  int? getId() {
     return activeId;
   }
 }

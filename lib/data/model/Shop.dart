@@ -1,11 +1,24 @@
 class Shop {
-  const Shop({
+  Shop({
     required this.id,
-    this.description,
+    required this.name,
     required this.date,
   });
 
-  final int id;
-  final String? description;
+  Shop.cadastro(
+    this.name,
+    this.date
+  );
+
+  int? id;
+  final String name;
   final DateTime date;
+
+  Map<String, Object?> toMap() {
+    return {
+      'id': id,
+      'name': name,
+      'date': date
+    };
+  }
 }

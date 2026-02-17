@@ -4,7 +4,7 @@ import 'package:market_manager/ui/widgets/DefaultScaffold.dart';
 class ShopDetailedPage extends StatelessWidget {
   ShopDetailedPage({super.key, required this.shopId});
 
-  final String shopId;
+  final int shopId;
   final ScrollController scroll = ScrollController();
 
   @override

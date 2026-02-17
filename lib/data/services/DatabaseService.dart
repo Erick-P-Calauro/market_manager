@@ -71,7 +71,7 @@ void createDatabaseEntities(Batch batch) {
   batch.execute('''
     CREATE TABLE IF NOT EXISTS shop(
       id INTEGER PRIMARY KEY AUTOINCREMENT,
-      description TEXT,
+      name VARCHAR(60),
       date DATE NOT NULL
     );
   ''');
