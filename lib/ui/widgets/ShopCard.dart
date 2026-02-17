@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:market_manager/data/model/Shop.dart';
 import 'package:market_manager/routes.dart';
 import 'package:market_manager/ui/model/ShopListModel.dart';
 import 'package:market_manager/ui/widgets/RouteArguments/ShopDetailedArguments.dart';
@@ -9,35 +10,28 @@ import 'package:provider/provider.dart';
 class ShopCard extends StatelessWidget {
   const ShopCard({
     super.key,
-    required this.id,
-    required this.name,
-    required this.total,
+    required this.shop
   });
 
-  final int id;
-  final String name;
-  final double total;
+  // Detailed Shop
+  final Shop shop;
 
   @override
   Widget build(BuildContext context) {
     final state = context.watch<ShopListModel>();
     final activeId = state.getId();
 
-    return activeId == id ? OpenShopCard(id: id, name: name, total: total) : CloseShopCard(id: id, name: name, total: total);
+    return activeId == shop.id ? OpenShopCard(shop: shop) : CloseShopCard(shop: shop);
   }
 }
 
 class CloseShopCard extends StatelessWidget {
   const CloseShopCard({
     super.key,
-    required this.id,
-    required this.name,
-    required this.total,
+    required this.shop
   });
-  
-  final int id;
-  final String name;
-  final double total;
+
+  final Shop shop;
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +39,7 @@ class CloseShopCard extends StatelessWidget {
 
     return GestureDetector(
       onTap: () => {
-        state.changeId(id)
+        state.changeId(shop.id)
       },
       child: Padding(
         padding: EdgeInsets.only(top: 25),
@@ -59,9 +53,9 @@ class CloseShopCard extends StatelessWidget {
               children: [
                 Row(
                   children: [
-                    Text(name, style: Typograph.TitleSmall),
+                    Text(shop.name, style: Typograph.TitleSmall),
                     SizedBox(width: 20),
-                    Text("Total : R\$ ${total.toStringAsFixed(2)}",
+                    Text("Total : R\$ ${shop.total!.toStringAsFixed(2)}",
                         style: Typograph.BodyLarge),
                   ],
                 ),
@@ -80,14 +74,10 @@ class CloseShopCard extends StatelessWidget {
 class OpenShopCard extends StatelessWidget {
   const OpenShopCard({
     super.key,
-    required this.id,
-    required this.name,
-    required this.total,
+    required this.shop
   });
 
-  final int id;
-  final String name;
-  final double total;
+  final Shop shop;
 
   @override
   Widget build(BuildContext context) {
@@ -110,7 +100,7 @@ class OpenShopCard extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(name, style: Typograph.TitleSmall),
+                    Text(shop.name, style: Typograph.TitleSmall),
                     Icon(
                       Icons.keyboard_arrow_down,
                       size: 24,
@@ -136,12 +126,12 @@ class OpenShopCard extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          "Total : R\$ ${total.toStringAsFixed(2)}",
+                          "Total : R\$ ${shop.total!.toStringAsFixed(2)}",
                           style: Typograph.SubtitleLarge,
                         ),
                         GestureDetector(
                           onTap: () => {
-                            Navigator.pushNamed(context, RouteGenerator.DetailShopPage, arguments: ShopDetailedArguments(shopId: id))
+                            Navigator.pushNamed(context, RouteGenerator.DetailShopPage, arguments: ShopDetailedArguments(shopId: shop.id!))
                           },
                           child: Container(
                             padding: EdgeInsets.symmetric(

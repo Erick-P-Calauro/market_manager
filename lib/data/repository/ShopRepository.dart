@@ -17,15 +17,15 @@ class ShopRepository {
   Future<List<Shop>> listar() async {
     final db = await _databaseService.getConnection();
 
-    List<Map<String, Object?>> maps = await db.query(table);
+    List<Map<String, Object?>> shopMaps = await db.query(table);
     List<Shop> shopList = [];
 
     for(final {
       'id': id as int,
       'name': name as String,
-      'date': date as DateTime
-    }in maps) {
-      shopList.add(Shop(id: id, name: name, date: date));
+      'date': date as int,
+    }in shopMaps) {
+      shopList.add(Shop.detailed(id, name, DateTime.fromMicrosecondsSinceEpoch(date), 0, []));
     }
 
     return shopList;
@@ -40,9 +40,9 @@ class ShopRepository {
     for(final {
       'id': id as int,
       'name': name as String,
-      'date': date as DateTime
+      'date': date as int
     }in map) {
-      shop = Shop(id: id, name: name, date: date);
+      shop = Shop(id: id, name: name, date: DateTime.fromMicrosecondsSinceEpoch(date));
     }
 
     return shop;

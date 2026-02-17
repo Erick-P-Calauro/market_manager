@@ -1,3 +1,4 @@
+import 'package:market_manager/data/model/MeasureUnity.dart';
 import 'package:market_manager/data/model/Product.dart';
 import 'package:market_manager/data/model/Shop.dart';
 
@@ -7,11 +8,13 @@ class Item {
       required this.shop,
       required this.product,
       required this.quantity,
-      required this.onCart});
+      required this.price,
+      required this.unity});
 
   final int id;
   final Shop shop;
   final Product product;
+  final MeasureUnity unity;
+  final double price;
   final double quantity;
-  final bool onCart;
 }

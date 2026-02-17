@@ -62,7 +62,7 @@ void createDatabaseEntities(Batch batch) {
       name VARCHAR(30) NOT NULL,
       category INTEGER
       barcode VARCHAR(20),
-      FOREIGN KEY (category) REFERENCES category(id),
+      FOREIGN KEY (category) REFERENCES category(id)
     );
   ''');
 
@@ -71,8 +71,8 @@ void createDatabaseEntities(Batch batch) {
   batch.execute('''
     CREATE TABLE IF NOT EXISTS shop(
       id INTEGER PRIMARY KEY AUTOINCREMENT,
-      name VARCHAR(60),
-      date DATE NOT NULL
+      name VARCHAR(60) NOT NULL,
+      date INT NOT NULL
     );
   ''');
 
@@ -82,11 +82,13 @@ void createDatabaseEntities(Batch batch) {
     CREATE TABLE IF NOT EXISTS item(
       id INTEGER PRIMARY KEY AUTOINCREMENT,
       quantity INTEGER NOT NULL,
-      onCart BOOLEAN NOT NULL,
+      price INTEGER,
       product INTEGER,
       shop INTEGER,
+      unity INTEGER,
       FOREIGN KEY (product) REFERENCES product(id),
-      FOREIGN KEY (shop) REFERENCES shop(id)
+      FOREIGN KEY (shop) REFERENCES shop(id),
+      FOREIGN KEY (unity) REFERENCES unity(id)
     );
   ''');
 

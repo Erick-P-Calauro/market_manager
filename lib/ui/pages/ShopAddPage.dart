@@ -1,13 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:market_manager/data/model/Shop.dart';
+import 'package:market_manager/routes.dart';
+import 'package:market_manager/ui/model/ShopAddPageModel.dart';
 import 'package:market_manager/ui/widgets/DefaultButtonRow.dart';
 import 'package:market_manager/ui/widgets/DefaultFormField.dart';
 import 'package:market_manager/ui/widgets/DefaultScaffold.dart';
 import 'package:market_manager/ui/widgets/Header.dart';
 
 class ShopAddPage extends StatelessWidget {
-  ShopAddPage({super.key});
+  ShopAddPage({super.key, required this.viewModel});
 
+  final ShopAddPageModel viewModel;
   final ScrollController scrollController = ScrollController();
+  final TextEditingController nameController = TextEditingController();
+  final TextEditingController dateController = TextEditingController();
+
+  void limparCampos() {
+    nameController.text = "";
+    dateController.text = "";
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -26,17 +37,27 @@ class ShopAddPage extends StatelessWidget {
                 spacing: 25,
                 children: [
                   DefaultFormField(
-                      controller: null,
-                      labelText: "Descrição da Compra",
-                      hintText: "Escreva uma descrição breve",
-                      maxWidth: contextWidth),
+                    controller: nameController,
+                    labelText: "Nome da Compra",
+                    hintText: "Escreva no nome da compra.",
+                    maxWidth: contextWidth),
                   DefaultFormField(
-                      controller: null,
-                      labelText: "Data da Compra",
-                      hintText: "20/02/2005",
-                      maxWidth: contextWidth),
+                    controller: dateController,
+                    labelText: "Data da Compra",
+                    hintText: "20/02/2005",
+                    maxWidth: contextWidth),
                   DefaultButtonRow(
-                    onConfirm: () => {print("Confirmou")},
+                    onConfirm: () {
+                      String date = dateController.text;
+                      List<int> dateParts = date.split("/").map((d) => int.parse(d)).toList();
+                      DateTime formatedDate = DateTime(dateParts[2], dateParts[1], dateParts[0]);
+
+                      viewModel.cadastrar(Shop.cadastro(nameController.text, formatedDate));
+
+                      limparCampos();
+
+                      Navigator.pushNamed(context, RouteGenerator.InitialPage);
+                    },
                   )
                 ],
               ),

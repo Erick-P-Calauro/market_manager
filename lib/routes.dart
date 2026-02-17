@@ -6,6 +6,8 @@ import 'package:market_manager/ui/model/CategoryListViewModel.dart';
 import 'package:market_manager/ui/model/MeasureUnityViewModel.dart';
 import 'package:market_manager/ui/model/ProductAddViewModel.dart';
 import 'package:market_manager/ui/model/ProductViewModel.dart';
+import 'package:market_manager/ui/model/ShopAddPageModel.dart';
+import 'package:market_manager/ui/model/ShopListModel.dart';
 import 'package:market_manager/ui/pages/CategoryAddPage.dart';
 import 'package:market_manager/ui/pages/CategoryListPage.dart';
 import 'package:market_manager/ui/pages/ProductAddPage.dart';
@@ -44,7 +46,7 @@ class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
       case InitialPage:
-        return MaterialPageRoute(builder: (context) => ShopListPage());
+        return MaterialPageRoute(builder: (context) => ShopListPage(viewModel: ShopListModel(context.read()),));
       case ListProductPage:
         return MaterialPageRoute(builder: (context) => ProductListPage(
           viewModel: ProductViewModel(
@@ -68,7 +70,7 @@ class RouteGenerator {
           ),
         ));
       case NewShopPage:
-        return MaterialPageRoute(builder: (context) => ShopAddPage());
+        return MaterialPageRoute(builder: (context) => ShopAddPage(viewModel: ShopAddPageModel(context.read()),));
       case NewCategoryPage:
         final args = settings.arguments as CategoryAddArguments;
 

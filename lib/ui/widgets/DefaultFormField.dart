@@ -30,20 +30,20 @@ class DefaultFormField extends StatelessWidget {
             controller: controller,
             style: Typograph.SubtitleLarge,
             decoration: InputDecoration(
-                hintText: hintText,
-                contentPadding:
-                    EdgeInsets.symmetric(vertical: 0, horizontal: 10),
-                border: InputBorder.none,
-                enabledBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(color: CustomColors.BlueMarket)),
-                focusedBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(color: CustomColors.BlueMarket)),
-                errorBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(color: CustomColors.BlueMarket)),
-                focusedErrorBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(color: CustomColors.BlueMarket)),
-                filled: true,
-                fillColor: CustomColors.LightGray1),
+              hintText: hintText,
+              contentPadding:
+                  EdgeInsets.symmetric(vertical: 0, horizontal: 10),
+              border: InputBorder.none,
+              enabledBorder: UnderlineInputBorder(
+                  borderSide: BorderSide(color: CustomColors.BlueMarket)),
+              focusedBorder: UnderlineInputBorder(
+                  borderSide: BorderSide(color: CustomColors.BlueMarket)),
+              errorBorder: UnderlineInputBorder(
+                  borderSide: BorderSide(color: CustomColors.BlueMarket)),
+              focusedErrorBorder: UnderlineInputBorder(
+                  borderSide: BorderSide(color: CustomColors.BlueMarket)),
+              filled: true,
+              fillColor: CustomColors.LightGray1),
           )
         ],
       ),

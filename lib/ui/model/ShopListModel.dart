@@ -13,6 +13,7 @@ class ShopListModel extends ChangeNotifier {
   // Shop load Logic
   void _load() async {
     _shopList = await _shopRepository.listar();
+    notifyListeners();
   }
 
   List<Shop> get shopList => _shopList;
