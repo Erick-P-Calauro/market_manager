@@ -1,1 +1,1 @@
-enum AddPageState { register, edit}
+enum PageState { register, edit}

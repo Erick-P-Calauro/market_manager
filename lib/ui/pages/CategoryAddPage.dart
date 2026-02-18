@@ -12,12 +12,12 @@ class CategoryAddPage extends StatelessWidget {
       {super.key,
       required this.viewModel,
       required this.mode,
-      this.categoryId});
+      this.payload});
 
   final CategoryAddViewModel viewModel; // Injetado via contexto
-  
-  final AddPageState mode; // Passado por argumento na rota
-  final int? categoryId; // Passado por argumento na rota
+  final PageState mode; // Passado por argumento na rota
+
+  final dynamic payload; // Passado por argumento na rota
 
   final categoryController = TextEditingController();
   final scrollController = ScrollController();
@@ -37,8 +37,8 @@ class CategoryAddPage extends StatelessWidget {
             ListenableBuilder(
               listenable: viewModel,
               builder: (context, child) {
-                if(mode == AddPageState.edit) {
-                  viewModel.carregarCategoria(categoryId!).then((cat) => {
+                if(mode == PageState.edit) {
+                  viewModel.carregarCategoria(payload!).then((cat) => {
                     categoryController.text = cat!.name
                   });
                 }
@@ -53,13 +53,13 @@ class CategoryAddPage extends StatelessWidget {
                           maxWidth: contextWidth),
                       DefaultButtonRow(
                         onConfirm: () => {
-                          if (mode == AddPageState.register){
+                          if (mode == PageState.register){
                             viewModel.cadastrarCategoria(categoryController.text),
                             Navigator.of(context).pushNamed(RouteGenerator.ListCategoryPage)
                           },
 
-                          if(mode == AddPageState.edit){
-                            viewModel.editarCategoria(categoryController.text, categoryId!),
+                          if(mode == PageState.edit){
+                            viewModel.editarCategoria(categoryController.text, payload!),
                             Navigator.of(context).pushNamed(RouteGenerator.ListCategoryPage)
                           }
                         },

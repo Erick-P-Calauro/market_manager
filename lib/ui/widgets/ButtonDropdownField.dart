@@ -11,7 +11,8 @@ class ButtonDropdownField extends StatelessWidget {
     required this.onTap,
     required this.icon,
     required this.items,
-    required this.onChanged
+    required this.onChanged,
+    this.initialValue
   });
 
   final String labelText;
@@ -21,6 +22,7 @@ class ButtonDropdownField extends StatelessWidget {
   final IconData icon;
   final List<String> items;
   final onChanged;
+  final String? initialValue;
 
   @override
   Widget build(BuildContext context) {
@@ -35,6 +37,7 @@ class ButtonDropdownField extends StatelessWidget {
             SizedBox(
               width: width,
               child: DropdownButtonFormField(
+                initialValue: initialValue,
                 style: Typograph.SubtitleLarge,
                 decoration: InputDecoration(
                     hintText: hintText,

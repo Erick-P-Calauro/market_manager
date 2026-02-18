@@ -17,5 +17,10 @@ class CategoryListViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
+  void deletarCategoria(int id) async {
+    _categoryRepository.deletar(id);
+    _load();
+  }
+
   List<Category> get categories => _categories;
 }

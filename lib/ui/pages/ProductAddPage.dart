@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:market_manager/data/model/Product.dart';
 import 'package:market_manager/routes.dart';
 import 'package:market_manager/ui/model/ProductAddViewModel.dart';
 import 'package:market_manager/ui/widgets/ButtonDropdownField.dart';
@@ -6,16 +7,24 @@ import 'package:market_manager/ui/widgets/ButtonTextField.dart';
 import 'package:market_manager/ui/widgets/DefaultButtonRow.dart';
 import 'package:market_manager/ui/widgets/DefaultFormField.dart';
 import 'package:market_manager/ui/widgets/DefaultScaffold.dart';
+import 'package:market_manager/utils/Enums.dart';
 import '../widgets/Header.dart';
 
 class ProductAddPage extends StatelessWidget {
-  ProductAddPage({super.key, required this.viewModel});
+  ProductAddPage({super.key, required this.viewModel, required this.state, this.payload});
 
   final ProductAddViewModel viewModel;
   final scrollController = ScrollController();
+  
+  final PageState state;
+  final dynamic payload;
 
   @override
   Widget build(BuildContext context) {
+
+    if(state == PageState.edit) {
+      viewModel.definirProduto(payload!);
+    }
 
     return DefaultScaffold(
       controller: scrollController,
@@ -28,10 +37,26 @@ class ProductAddPage extends StatelessWidget {
             ListenableBuilder(
               listenable: viewModel, 
               builder: (context, child) {
+
                 return ProductForm(
+                  product: viewModel.produtoEscolhido,
                   categories: viewModel.categories.map((cat) => cat.name).toList(),
-                  onSubmitForm: (String categoria, String nome, String barcode) => {
-                    viewModel.cadastrarProduto(categoria, nome, barcode)
+                  onSubmitForm: (String categoria, String nome, String barcode) {
+                    if(state == PageState.register) {
+                      viewModel.cadastrarProduto(categoria, nome, barcode).then((r) => {
+                        if(context.mounted) {
+                          Navigator.pushNamed(context, RouteGenerator.ListProductPage)
+                        }
+                      });
+                    }
+
+                    if(state == PageState.edit) {
+                      viewModel.editarProduto(payload!, categoria, nome, barcode).then((r) => {
+                        if(context.mounted) {
+                          Navigator.pushNamed(context, RouteGenerator.ListProductPage)
+                        }
+                      });
+                    }
                   },
                 );
               }
@@ -43,9 +68,11 @@ class ProductAddPage extends StatelessWidget {
   }
 }
 
+// ignore: must_be_immutable
 class ProductForm extends StatefulWidget {
-  const ProductForm({super.key, required this.categories, required this.onSubmitForm});
+  ProductForm({super.key, required this.categories, this.product, required this.onSubmitForm});
 
+  Product? product;
   final List<String> categories;
   final Function onSubmitForm;
 
@@ -71,6 +98,12 @@ class _ProductFormState extends State<ProductForm> {
   Widget build(BuildContext context) {
     final contextWidth = MediaQuery.of(context).size.width;
 
+    if(widget.product != null) {
+      nomeProduto.text = widget.product!.name;
+      barcode.text = widget.product!.barcode;
+      categoriaEscolhida = widget.product!.category.name;
+    }
+
     return Form(
       child: Column(
       spacing: 25,
@@ -87,6 +120,7 @@ class _ProductFormState extends State<ProductForm> {
           width: contextWidth - 94,
           onTap: () => {print("Nova Categoria")},
           icon: Icons.add_box,
+          initialValue: categoriaEscolhida != "" ? categoriaEscolhida : null,
           items: widget.categories,
           onChanged: (String value) {
             setState(() {
@@ -106,7 +140,6 @@ class _ProductFormState extends State<ProductForm> {
           onConfirm: () {
             widget.onSubmitForm(categoriaEscolhida!, nomeProduto.text,  barcode.text);
             limparCampos();
-            Navigator.pushNamed(context, RouteGenerator.ListProductPage);
           },
         )
       ],

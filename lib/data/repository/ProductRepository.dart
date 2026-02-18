@@ -74,7 +74,7 @@ class ProductRepository {
     return product;
   }
 
-  Future<void> editar(int id, Product product) async {
+  Future<void> editar(int id, ProductSave product) async {
     final db = await _databaseService.getConnection();
 
     Product nProduct = Product(id, product.name, product.category, product.barcode);

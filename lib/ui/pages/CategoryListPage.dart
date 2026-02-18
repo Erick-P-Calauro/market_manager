@@ -2,10 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:market_manager/routes.dart';
 import 'package:market_manager/ui/model/CategoryListViewModel.dart';
 import 'package:market_manager/ui/widgets/DefaultScaffold.dart';
-import 'package:market_manager/ui/widgets/RouteArguments/CategoryAddArguments.dart';
-import 'package:market_manager/utils/CustomColors.dart';
+import 'package:market_manager/ui/widgets/EntityCard.dart';
+import 'package:market_manager/ui/widgets/RouteArguments/CategoryEditArguments.dart';
 import 'package:market_manager/utils/Enums.dart';
-import 'package:market_manager/utils/Typograph.dart';
 import '../widgets/Header.dart';
 
 class CategoryListPage extends StatelessWidget {
@@ -16,7 +15,6 @@ class CategoryListPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final contextWidth = MediaQuery.of(context).size.width - 40;
 
     return DefaultScaffold(
       controller: scrollController,
@@ -25,10 +23,9 @@ class CategoryListPage extends StatelessWidget {
         child: Column(
           spacing: 40,
           children: [
-            HeaderPlus<CategoryAddArguments>(
+            HeaderPlus(
               text: "Categorias",
               newPage: RouteGenerator.NewCategoryPage,
-              arguments: CategoryAddArguments(mode: AddPageState.register),
             ),
             ListenableBuilder(
               listenable: viewModel,
@@ -41,38 +38,21 @@ class CategoryListPage extends StatelessWidget {
                     return const SizedBox(height: 15);
                   },
                   itemBuilder: (BuildContext context, int index) {
-                    return GestureDetector(
-                      onTap: () => {
+                    return EntityCard(
+                      text: viewModel.categories[index].name,
+                      onEdit: () => {
                         Navigator.of(context)
                           .pushNamed(
-                            RouteGenerator.NewCategoryPage, 
-                            arguments: CategoryAddArguments(mode: AddPageState.edit, categoryId: viewModel.categories[index].id)
+                            RouteGenerator.EditCategoryPage, 
+                            arguments: CategoryEditArguments(
+                              mode: PageState.edit, 
+                              categoryId: viewModel.categories[index].id
+                            )
                           )
                       },
-
-                      // Implementar mudança para deletar
-                      onLongPress: () => {
-                        print("Segurou")
-                      },
-
-                      child: Container(
-                        padding:
-                            EdgeInsets.symmetric(vertical: 13, horizontal: 20),
-                        color: CustomColors.LightGray1,
-                        width: contextWidth,
-                        child: Row(
-                          spacing: 20,
-                          children: [
-                            Icon(
-                              Icons.menu,
-                              size: 24,
-                              color: Colors.black,
-                            ),
-                            Text(viewModel.categories[index].name,
-                                style: Typograph.TitleSmall)
-                          ],
-                        ),
-                      ),
+                      onDelete: () => {
+                        viewModel.deletarCategoria(viewModel.categories[index].id),
+                      }
                     );
                   },
                 );
@@ -84,3 +64,4 @@ class CategoryListPage extends StatelessWidget {
     );
   }
 }
+

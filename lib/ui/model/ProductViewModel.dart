@@ -3,6 +3,7 @@ import 'package:market_manager/data/model/Category.dart';
 import 'package:market_manager/data/model/Product.dart';
 import 'package:market_manager/data/repository/CategoryRepository.dart';
 import 'package:market_manager/data/repository/ProductRepository.dart';
+
 class ProductViewModel extends ChangeNotifier {
   ProductViewModel(
     this._productRepository,
@@ -26,6 +27,12 @@ class ProductViewModel extends ChangeNotifier {
     }
 
     notifyListeners();
+  }
+
+  Future<bool> deletarProduto(int id) async {
+    await _productRepository.deletar(id);
+    
+    return true;
   }
 
   List<List<Product>> get products => _products;

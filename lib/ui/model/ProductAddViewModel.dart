@@ -19,33 +19,47 @@ class ProductAddViewModel extends ChangeNotifier {
   List<Product> _products = [];
   List<Category> _categories = [];
 
+  // Categoria para cadastro e edição de produtos
+  Product?  produtoEscolhido;
+
   void _load() async {
     _products = await _productRepository.listar();
     _categories = await _categoryRepository.listar();
-
-    print(_categories);
     
     notifyListeners();
   }
 
-  void cadastrarProduto(String categoryName, String name, String barcode) async {
-
-    if(categoryName.isEmpty || categoryName == "") {
-      return;
-    }
-
-    Category? categoria = await _categoryRepository.buscarPorNome(categoryName);
-    _productRepository.cadastrar(ProductSave(name, categoria!, barcode));
-
-    notifyListeners();
-  }
-
-  void carregarCategorias() async {
-    _categories = await _categoryRepository.listar();
+  void definirProduto(int id) async {
+    produtoEscolhido = await _productRepository.buscar(id);
 
     notifyListeners();
   }
 
   List<Product> get products => _products;
   List<Category> get categories => _categories;
+  Product? get procut => produtoEscolhido;
+
+  Future<bool> cadastrarProduto(String categoryName, String name, String barcode) async {
+
+    if(categoryName.isEmpty || categoryName == "") {
+      return false;
+    }
+
+    Category? categoria = await _categoryRepository.buscarPorNome(categoryName);
+    _productRepository.cadastrar(ProductSave(name, categoria!, barcode));
+
+    return true;
+  }
+
+  Future<bool> editarProduto(int id, String categoryName, String name, String barcode) async {
+
+    if(categoryName.isEmpty || categoryName == "") {
+      return false;
+    }
+
+    Category? categoria = await _categoryRepository.buscarPorNome(categoryName);
+    _productRepository.editar(id, ProductSave(name, categoria!, barcode));
+
+    return true;
+  }
 }
