@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:market_manager/data/model/MeasureUnity.dart';
 import 'package:market_manager/routes.dart';
 import 'package:market_manager/ui/model/MeasureUnityViewModel.dart';
 import 'package:market_manager/ui/widgets/DefaultScaffold.dart';
-import 'package:market_manager/utils/CustomColors.dart';
-import 'package:market_manager/utils/Typograph.dart';
+import 'package:market_manager/ui/widgets/EntityCard.dart';
+import 'package:market_manager/ui/widgets/RouteArguments/MeasureUnityEditArguments.dart';
 
 import '../widgets/Header.dart';
 
@@ -15,7 +16,6 @@ class UnityListPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final contextWidth = MediaQuery.of(context).size.width - 40;
 
     return DefaultScaffold(
       controller: scrollController,
@@ -39,24 +39,16 @@ class UnityListPage extends StatelessWidget {
                     return const SizedBox(height: 15);
                   },
                   itemBuilder: (BuildContext context, int index) {
-                    return Container(
-                      padding:
-                          EdgeInsets.symmetric(vertical: 13, horizontal: 20),
-                      color: CustomColors.LightGray1,
-                      width: contextWidth,
-                      child: Row(
-                        spacing: 20,
-                        children: [
-                          Icon(
-                            Icons.menu,
-                            size: 24,
-                            color: Colors.black,
-                          ),
-                          Text(
-                              "${viewModel.unities[index].name} (${viewModel.unities[index].abbreviation})",
-                              style: Typograph.TitleSmall)
-                        ],
-                      ),
+                    MeasureUnity unity = viewModel.unities[index];
+
+                    return EntityCard(
+                      text: "${unity.name} (${unity.abbreviation})", 
+                      onEdit: () {
+                        Navigator.pushNamed(context, RouteGenerator.EditUnityPage, arguments: MeasureUnityEditArguments(unityId: unity.id!));
+                      },
+                      onDelete: () {
+                        viewModel.deletar(unity.id!);
+                      }
                     );
                   },
                 );
@@ -68,3 +60,5 @@ class UnityListPage extends StatelessWidget {
     );
   }
 }
+
+

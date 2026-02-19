@@ -33,11 +33,10 @@ class ProductAddPage extends StatelessWidget {
         child: Column(
           spacing: 40,
           children: [
-            Header(text: "Cadastro de Produtos"),
+            Header(text: state == PageState.edit ? "Edição de Produtos" : "Cadastro de Produtos"),
             ListenableBuilder(
               listenable: viewModel, 
               builder: (context, child) {
-
                 return ProductForm(
                   product: viewModel.produtoEscolhido,
                   categories: viewModel.categories.map((cat) => cat.name).toList(),
@@ -45,6 +44,7 @@ class ProductAddPage extends StatelessWidget {
                     if(state == PageState.register) {
                       viewModel.cadastrarProduto(categoria, nome, barcode).then((r) => {
                         if(context.mounted) {
+                          Navigator.pop(context),
                           Navigator.pushNamed(context, RouteGenerator.ListProductPage)
                         }
                       });
@@ -53,6 +53,7 @@ class ProductAddPage extends StatelessWidget {
                     if(state == PageState.edit) {
                       viewModel.editarProduto(payload!, categoria, nome, barcode).then((r) => {
                         if(context.mounted) {
+                          Navigator.pop(context),
                           Navigator.pushNamed(context, RouteGenerator.ListProductPage)
                         }
                       });
@@ -70,9 +71,9 @@ class ProductAddPage extends StatelessWidget {
 
 // ignore: must_be_immutable
 class ProductForm extends StatefulWidget {
-  ProductForm({super.key, required this.categories, this.product, required this.onSubmitForm});
+  const ProductForm({super.key, required this.categories, this.product, required this.onSubmitForm});
 
-  Product? product;
+  final Product? product;
   final List<String> categories;
   final Function onSubmitForm;
 

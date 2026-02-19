@@ -7,7 +7,7 @@ class CategoryAddViewModel extends ChangeNotifier {
       : _categoryRepository = categoryRepository;
 
   final CategoryRepository _categoryRepository;
-  Category? category;
+  Category? _category;
 
   void cadastrarCategoria(String category) {
     _categoryRepository.cadastrar(category);
@@ -22,9 +22,11 @@ class CategoryAddViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<Category?> carregarCategoria(int categoryId) async {
-    category = await _categoryRepository.buscar(categoryId);
+  void definirCategoria(int categoryId) async {
+    _category = await _categoryRepository.buscar(categoryId);
 
-    return category;
+    notifyListeners();
   }
+
+  Category? get categoryEscolhida => _category;
 }

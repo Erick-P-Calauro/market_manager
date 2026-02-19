@@ -3,6 +3,7 @@ import 'package:market_manager/data/repository/CategoryRepository.dart';
 import 'package:market_manager/data/repository/ProductRepository.dart';
 import 'package:market_manager/ui/model/CategoryAddViewModel.dart';
 import 'package:market_manager/ui/model/CategoryListViewModel.dart';
+import 'package:market_manager/ui/model/MeasureUnityAddViewModel.dart';
 import 'package:market_manager/ui/model/MeasureUnityViewModel.dart';
 import 'package:market_manager/ui/model/ProductAddViewModel.dart';
 import 'package:market_manager/ui/model/ProductViewModel.dart';
@@ -19,6 +20,7 @@ import 'package:market_manager/ui/pages/ShopListPage.dart';
 import 'package:market_manager/ui/pages/UnityAddPage.dart';
 import 'package:market_manager/ui/pages/UnityListPage.dart';
 import 'package:market_manager/ui/widgets/RouteArguments/CategoryEditArguments.dart';
+import 'package:market_manager/ui/widgets/RouteArguments/MeasureUnityEditArguments.dart';
 import 'package:market_manager/ui/widgets/RouteArguments/ProductEditArguments.dart';
 import 'package:market_manager/ui/widgets/RouteArguments/ShopDetailedArguments.dart';
 import 'package:market_manager/utils/Enums.dart';
@@ -97,7 +99,7 @@ class RouteGenerator {
         return MaterialPageRoute(
           builder: (context) => CategoryAddPage(
             viewModel: CategoryAddViewModel(categoryRepository: context.read()),
-            mode: PageState.register,
+            state: PageState.register,
           )
         );
       case EditCategoryPage: 
@@ -106,7 +108,7 @@ class RouteGenerator {
         return MaterialPageRoute(
           builder: (context) => CategoryAddPage(
             viewModel: CategoryAddViewModel(categoryRepository: context.read()),
-            mode: args.mode,
+            state: args.mode,
             payload: args.categoryId
           )
         );
@@ -117,7 +119,18 @@ class RouteGenerator {
       case NewUnityPage:
         return MaterialPageRoute(
             builder: (context) => UnityAddPage(
-                  viewModel: MeasureUnityViewModel(unityRepository: context.read())));
+              viewModel: MeasureUnityAddViewModel(unityRepository: context.read()),
+              state: PageState.register,
+            ));
+      case EditUnityPage:
+        final args = settings.arguments as MeasureUnityEditArguments;
+
+        return MaterialPageRoute(
+            builder: (context) => UnityAddPage(
+              viewModel: MeasureUnityAddViewModel(unityRepository: context.read()),
+              state: PageState.edit,
+              payload: args.unityId,
+            ));
       case Settings:
         return MaterialPageRoute(builder: (context) => SettingsPage());
       default:

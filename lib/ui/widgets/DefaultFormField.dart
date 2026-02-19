@@ -29,6 +29,7 @@ class DefaultFormField extends StatelessWidget {
           TextField(
             controller: controller,
             style: Typograph.SubtitleLarge,
+            textInputAction: TextInputAction.next,
             decoration: InputDecoration(
               hintText: hintText,
               contentPadding:

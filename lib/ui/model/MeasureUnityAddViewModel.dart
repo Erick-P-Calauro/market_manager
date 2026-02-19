@@ -2,20 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:market_manager/data/model/MeasureUnity.dart';
 import 'package:market_manager/data/repository/MeasureUnityRepository.dart';
 
-class MeasureUnityViewModel extends ChangeNotifier {
-  MeasureUnityViewModel({required MeasureUnityRepository unityRepository})
-      : _unityRepository = unityRepository {
-    _load();
-  }
+class MeasureUnityAddViewModel extends ChangeNotifier {
+  MeasureUnityAddViewModel({required MeasureUnityRepository unityRepository})
+      : _unityRepository = unityRepository;
 
   final MeasureUnityRepository _unityRepository;
-  List<MeasureUnity> _unities = [];
-
-  void _load() async {
-    _unities = await _unityRepository.listar();
-
-    notifyListeners();
-  }
+  MeasureUnity? _unity;
 
   void cadastrar(MeasureUnity unity) async {
     _unityRepository.cadastrar(unity);
@@ -29,10 +21,11 @@ class MeasureUnityViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  void deletar(int id) {
-    _unityRepository.deletar(id);
-    _load();
+  void definirUnidade(int id) async {
+    _unity = await _unityRepository.buscar(id);
+
+    notifyListeners();
   }
-  
-  List<MeasureUnity> get unities => _unities;
+
+  MeasureUnity? get unityEscolhida => _unity;
 }

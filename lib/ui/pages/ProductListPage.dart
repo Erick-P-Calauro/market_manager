@@ -71,6 +71,7 @@ class ProductListPage extends StatelessWidget {
                               onDelete: () {
                                 viewModel.deletarProduto(products[index].id).then((r) => {
                                   if(context.mounted) {
+                                    Navigator.pop(context),
                                     Navigator.pushNamed(context, RouteGenerator.ListProductPage)
                                   }
                                 });
