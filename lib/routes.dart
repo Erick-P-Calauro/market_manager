@@ -3,14 +3,17 @@ import 'package:market_manager/data/repository/CategoryRepository.dart';
 import 'package:market_manager/data/repository/ProductRepository.dart';
 import 'package:market_manager/ui/model/CategoryAddViewModel.dart';
 import 'package:market_manager/ui/model/CategoryListViewModel.dart';
+import 'package:market_manager/ui/model/ItemAddViewModel.dart';
 import 'package:market_manager/ui/model/MeasureUnityAddViewModel.dart';
 import 'package:market_manager/ui/model/MeasureUnityViewModel.dart';
 import 'package:market_manager/ui/model/ProductAddViewModel.dart';
 import 'package:market_manager/ui/model/ProductViewModel.dart';
 import 'package:market_manager/ui/model/ShopAddPageModel.dart';
+import 'package:market_manager/ui/model/ShopDetailedViewModel.dart';
 import 'package:market_manager/ui/model/ShopListModel.dart';
 import 'package:market_manager/ui/pages/CategoryAddPage.dart';
 import 'package:market_manager/ui/pages/CategoryListPage.dart';
+import 'package:market_manager/ui/pages/ItemAddPage.dart';
 import 'package:market_manager/ui/pages/ProductAddPage.dart';
 import 'package:market_manager/ui/pages/ProductListPage.dart';
 import 'package:market_manager/ui/pages/SettingsPage.dart';
@@ -33,6 +36,7 @@ class RouteGenerator {
   static const String ListShopPage = InitialPage;
   static const String NewShopPage = "/shop/new";
   static const String DetailShopPage = "/shop/detail";
+  static const String AddItemPage = "/shop/item/add";
 
   // Product Related
   static const String ListProductPage = "/product";
@@ -63,8 +67,12 @@ class RouteGenerator {
         final args = settings.arguments as ShopDetailedArguments;
         
         return MaterialPageRoute(
-          builder: (context) => ShopDetailedPage(shopId: args.shopId)
+          builder: (context) => ShopDetailedPage(
+            viewModel: ShopDetailedViewModel(context.read(), args.shopId),
+          )
         );
+      case AddItemPage:
+        return MaterialPageRoute(builder: (context) => ItemAddPage(viewModel: ItemAddViewModel()));
       case ListProductPage:
         return MaterialPageRoute(builder: (context) => ProductListPage(
           viewModel: ProductViewModel(

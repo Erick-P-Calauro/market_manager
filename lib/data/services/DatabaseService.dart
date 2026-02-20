@@ -82,6 +82,7 @@ void createDatabaseEntities(Batch batch) {
       product INTEGER,
       shop INTEGER,
       unity INTEGER,
+      onCart BOOLEAN,
       FOREIGN KEY (product) REFERENCES product(id),
       FOREIGN KEY (shop) REFERENCES shop(id),
       FOREIGN KEY (unity) REFERENCES unity(id)

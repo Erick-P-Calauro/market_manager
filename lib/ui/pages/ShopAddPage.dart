@@ -12,6 +12,43 @@ class ShopAddPage extends StatelessWidget {
 
   final ShopAddPageModel viewModel;
   final ScrollController scrollController = ScrollController();
+
+  @override
+  Widget build(BuildContext context) {
+    return DefaultScaffold(
+      controller: scrollController,
+      child: Container(
+        padding: EdgeInsets.fromLTRB(20, 40, 20, 0),
+        child: Column(
+          spacing: 40,
+          children: [
+            Header(text: "Cadastro de Lista de Compras"),
+            ShopForm(
+              onSubmitForm: (String name, DateTime date) {
+                viewModel.cadastrar(ShopSave(name, date));
+              },
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class ShopForm extends StatefulWidget {
+  const ShopForm({super.key, required this.onSubmitForm});
+  
+  final Function onSubmitForm;
+
+  @override
+  State<StatefulWidget> createState() {
+    return _ShopFormState();
+  }
+
+}
+
+class _ShopFormState extends State<ShopForm> {
+
   final TextEditingController nameController = TextEditingController();
   final TextEditingController dateController = TextEditingController();
 
@@ -24,47 +61,36 @@ class ShopAddPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final contextWidth = MediaQuery.of(context).size.width;
 
-    return DefaultScaffold(
-      controller: scrollController,
-      child: Container(
-        padding: EdgeInsets.fromLTRB(20, 40, 20, 0),
-        child: Column(
-          spacing: 40,
-          children: [
-            Header(text: "Cadastro de Lista de Compras"),
-            Form(
-              child: Column(
-                spacing: 25,
-                children: [
-                  DefaultFormField(
-                    controller: nameController,
-                    labelText: "Nome da Compra",
-                    hintText: "Escreva no nome da compra.",
-                    maxWidth: contextWidth),
-                  DefaultFormField(
-                    controller: dateController,
-                    labelText: "Data da Compra",
-                    hintText: "20/02/2005",
-                    maxWidth: contextWidth),
-                  DefaultButtonRow(
-                    onConfirm: () {
-                      String date = dateController.text;
-                      List<int> dateParts = date.split("/").map((d) => int.parse(d)).toList();
-                      DateTime formatedDate = DateTime(dateParts[2], dateParts[1], dateParts[0]);
+    return Form(
+      child: Column(
+        spacing: 25,
+        children: [
+          DefaultFormField(
+            controller: nameController,
+            labelText: "Nome da Compra",
+            hintText: "Escreva no nome da compra.",
+            maxWidth: contextWidth),
+          DefaultFormField(
+            controller: dateController,
+            labelText: "Data da Compra",
+            hintText: "20/02/2005",
+            maxWidth: contextWidth),
+          DefaultButtonRow(
+            onConfirm: () {
+              String date = dateController.text;
+              List<int> dateParts = date.split("/").map((d) => int.parse(d)).toList();
+              DateTime formatedDate = DateTime(dateParts[2], dateParts[1], dateParts[0]);
 
-                      viewModel.cadastrar(ShopSave(nameController.text, formatedDate));
+              widget.onSubmitForm(nameController.text, formatedDate);
 
-                      limparCampos();
+              limparCampos();
 
-                      Navigator.pushNamed(context, RouteGenerator.InitialPage);
-                    },
-                  )
-                ],
-              ),
-            )
-          ],
-        ),
+              Navigator.pushNamed(context, RouteGenerator.InitialPage);
+            },
+          )
+        ],
       ),
     );
   }
+  
 }

@@ -10,7 +10,7 @@ class DefaultDropdownField extends StatefulWidget {
       required this.hintText,
       required this.maxWidth,
       required this.value,
-      this.items});
+      required this.items});
 
   final String labelText;
   final String hintText;

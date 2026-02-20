@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:market_manager/routes.dart';
 import 'package:market_manager/utils/Typograph.dart';
 
 class Header extends StatelessWidget {
@@ -13,7 +12,9 @@ class Header extends StatelessWidget {
       children: [
         GestureDetector(
           onTap: () =>
-              {Navigator.pushNamed(context, RouteGenerator.InitialPage)},
+          {
+            Navigator.pop(context)
+          },
           child: Icon(Icons.arrow_back, size: 24, color: Colors.black),
         ),
         SizedBox(width: 20),
@@ -42,7 +43,9 @@ class HeaderPlus <T> extends StatelessWidget {
             children: [
               GestureDetector(
                 onTap: () =>
-                    {Navigator.pushNamed(context, RouteGenerator.InitialPage)},
+                {
+                  Navigator.pop(context)
+                },
                 child: Icon(Icons.arrow_back, size: 24, color: Colors.black),
               ),
               SizedBox(width: 20),

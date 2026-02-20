@@ -2,19 +2,22 @@ import 'package:flutter/material.dart';
 import 'package:market_manager/utils/CustomColors.dart';
 import 'package:market_manager/utils/Typograph.dart';
 
+// ignore: must_be_immutable
 class DefaultFormField extends StatelessWidget {
-  const DefaultFormField({
+  DefaultFormField({
     super.key,
     required this.labelText,
     required this.hintText,
     required this.maxWidth,
     required this.controller,
+    this.keyboardType,
   });
 
   final TextEditingController? controller;
   final String labelText;
   final String hintText;
   final double maxWidth;
+  TextInputType? keyboardType;
 
   @override
   Widget build(BuildContext context) {
@@ -30,6 +33,7 @@ class DefaultFormField extends StatelessWidget {
             controller: controller,
             style: Typograph.SubtitleLarge,
             textInputAction: TextInputAction.next,
+            keyboardType: keyboardType,
             decoration: InputDecoration(
               hintText: hintText,
               contentPadding:
