@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:market_manager/routes.dart';
 import 'package:market_manager/ui/model/CategoryAddViewModel.dart';
-import 'package:market_manager/ui/widgets/DefaultButtonRow.dart';
-import 'package:market_manager/ui/widgets/DefaultFormField.dart';
+import 'package:market_manager/ui/widgets/FormFields/DefaultButtonRow.dart';
+import 'package:market_manager/ui/widgets/FormFields/DefaultFormField.dart';
 import 'package:market_manager/ui/widgets/DefaultScaffold.dart';
 import 'package:market_manager/ui/widgets/Header.dart';
 import 'package:market_manager/utils/Enums.dart';

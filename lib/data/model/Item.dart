@@ -10,7 +10,8 @@ class Item {
     required this.product,
     required this.quantity,
     required this.price,
-    required this.unity
+    required this.unity,
+    required this.onCart
     }
   );
 
@@ -20,4 +21,5 @@ class Item {
   final MeasureUnity unity;
   final double price;
   final int quantity;
+  final bool onCart;
 }

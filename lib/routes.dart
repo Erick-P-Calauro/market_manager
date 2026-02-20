@@ -23,6 +23,7 @@ import 'package:market_manager/ui/pages/ShopListPage.dart';
 import 'package:market_manager/ui/pages/UnityAddPage.dart';
 import 'package:market_manager/ui/pages/UnityListPage.dart';
 import 'package:market_manager/ui/widgets/RouteArguments/CategoryEditArguments.dart';
+import 'package:market_manager/ui/widgets/RouteArguments/ItemAddArguments.dart';
 import 'package:market_manager/ui/widgets/RouteArguments/MeasureUnityEditArguments.dart';
 import 'package:market_manager/ui/widgets/RouteArguments/ProductEditArguments.dart';
 import 'package:market_manager/ui/widgets/RouteArguments/ShopDetailedArguments.dart';
@@ -72,7 +73,17 @@ class RouteGenerator {
           )
         );
       case AddItemPage:
-        return MaterialPageRoute(builder: (context) => ItemAddPage(viewModel: ItemAddViewModel()));
+        final args = settings.arguments as ItemAddArguments;
+
+        return MaterialPageRoute(builder: (context) => ItemAddPage(
+            viewModel: ItemAddViewModel(
+              context.read(),
+              context.read(),
+              context.read(),
+              args.shopId,
+            )
+          )
+        );
       case ListProductPage:
         return MaterialPageRoute(builder: (context) => ProductListPage(
           viewModel: ProductViewModel(

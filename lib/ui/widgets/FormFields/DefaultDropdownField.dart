@@ -5,18 +5,24 @@ import 'package:market_manager/utils/Typograph.dart';
 // ignore: must_be_immutable
 class DefaultDropdownField extends StatefulWidget {
   DefaultDropdownField(
-      {super.key,
+      {
+      super.key,
+      this.Rkey,
       required this.labelText,
       required this.hintText,
       required this.maxWidth,
       required this.value,
-      required this.items});
+      required this.items,
+      this.onChangedParam,
+    });
 
+  final Key? Rkey;
   final String labelText;
   final String hintText;
   final double maxWidth;
   final List<dynamic>? items;
   String? value;
+  Function? onChangedParam;
   
   @override
   State<StatefulWidget> createState() {
@@ -37,7 +43,8 @@ class DefaultDropDownFieldState extends State<DefaultDropdownField> {
           Text(widget.labelText, style: Typograph.TitleSmall),
           SizedBox(height: 10),
           DropdownButtonFormField(
-            style: Typograph.SubtitleLarge,
+            key: widget.Rkey,
+            style: Typograph.SubtitleLarge.copyWith(color: Colors.black),
             decoration: InputDecoration(
                 hintText: widget.hintText,
                 contentPadding:
@@ -57,8 +64,13 @@ class DefaultDropDownFieldState extends State<DefaultDropdownField> {
             onChanged: (dynamic value) {
               setState(() {
                 widget.value = value;
+
+                if(widget.onChangedParam != null) {
+                  widget.onChangedParam!(value);
+                }
               });
             },
+            
           )
         ],
       ),

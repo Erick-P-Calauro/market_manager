@@ -3,6 +3,7 @@ import 'package:market_manager/routes.dart';
 import 'package:market_manager/ui/model/ShopDetailedViewModel.dart';
 import 'package:market_manager/ui/widgets/DefaultScaffold.dart';
 import 'package:market_manager/ui/widgets/Header.dart';
+import 'package:market_manager/ui/widgets/RouteArguments/ItemAddArguments.dart';
 import 'package:market_manager/utils/Typograph.dart';
 
 class ShopDetailedPage extends StatelessWidget {
@@ -23,9 +24,9 @@ class ShopDetailedPage extends StatelessWidget {
             return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                HeaderPlus(text: viewModel.shop?.name ?? "Lista de Compras" , newPage: RouteGenerator.AddItemPage),
+                HeaderPlus<ItemAddArguments>(text: viewModel.shop?.name ?? "Lista de Compras" , newPage: RouteGenerator.AddItemPage, arguments: ItemAddArguments(shopId: viewModel.shop!.id!)),
                 SizedBox(height: 40),
-                Text("Itens", style: Typograph.HeadlineSmall),
+                Text("Lista de Itens", style: Typograph.HeadlineSmall),
                 SizedBox(height: 40),
                 Text("Carrinho", style: Typograph.HeadlineSmall),
               ],

@@ -36,7 +36,7 @@ void createDatabaseEntities(Batch batch) {
   batch.execute('''
     CREATE TABLE IF NOT EXISTS category(
       id INTEGER PRIMARY KEY AUTOINCREMENT, 
-      name VARCHAR(30) NOT NULL
+      name VARCHAR(30) NOT NULL UNIQUE
     );
   ''');
 
@@ -55,7 +55,7 @@ void createDatabaseEntities(Batch batch) {
   batch.execute('''
     CREATE TABLE IF NOT EXISTS product(
       id INTEGER PRIMARY KEY AUTOINCREMENT, 
-      name VARCHAR(30) NOT NULL,
+      name VARCHAR(30) NOT NULL UNIQUE,
       category INTEGER,
       barcode VARCHAR(20),
       FOREIGN KEY (category) REFERENCES category(id)

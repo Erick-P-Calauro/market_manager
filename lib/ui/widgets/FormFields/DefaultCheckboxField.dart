@@ -24,15 +24,45 @@ class DefaultCheckboxField extends StatelessWidget {
         children: [
           Text(labelText, style: Typograph.TitleSmall),
           SizedBox(height: 10),
-          Checkbox(
-            value: false,
-            onChanged: (bool? newValue) {
-              onChecked();
-            },
-            side: BorderSide(color: CustomColors.BlueMarket, width: 2),
+          CheckboxWidget(
+            onChecked: onChecked
           )
         ],
       ),
     );
   }
+}
+
+class CheckboxWidget extends StatefulWidget {
+  const CheckboxWidget({
+    super.key,
+    required this.onChecked,
+  });
+
+  final Function onChecked;
+  
+  @override
+  State<StatefulWidget> createState() {
+    return _CheckboxWidgetState();
+  }
+  
+}
+
+class _CheckboxWidgetState extends State<CheckboxWidget> {
+  bool value = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return Checkbox(
+      value: value,
+      onChanged: (bool? newValue) {
+        setState(() {
+          value = newValue ?? false;
+          widget.onChecked(newValue);
+        });
+      },
+      side: BorderSide(color: CustomColors.BlueMarket, width: 2),
+    );
+  }
+
 }
